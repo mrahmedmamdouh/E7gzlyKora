@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "302792210485",
+    "firebase_url": "https://e7gzly-kora.firebaseio.com",
+    "project_id": "e7gzly-kora",
+    "storage_bucket": "e7gzly-kora.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302792210485:android:1a57bf3ad62c0c76",
+        "android_client_info": {
+          "package_name": "com.example.android.e7gzlykora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302792210485-9cds5krgl95032ol5i12a8vhrtr4tmhv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.e7gzlykora",
+            "certificate_hash": "0bd3435654da2e0eb41570241fe239d26a18ffbf"
+          }
+        },
+        {
+          "client_id": "302792210485-sr3b95gg5fsj10jei61ehdefin0kdk9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVqJ1OAtdNqJQ4fDVvj_o9YdUqnUt-8uY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302792210485-sr3b95gg5fsj10jei61ehdefin0kdk9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
