@@ -86,28 +86,7 @@
 
                 />
         </android.support.design.widget.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:weightSum="3"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editPassword1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text=""
-
-                />
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

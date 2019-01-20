@@ -83,4 +83,68 @@ The Goings On app, a free guide to New York City culture from the staff of The N
         <item>60 minutes</item>
         <item>120 minutes</item>
     </string-array>
+
+    <string-array name="zone1">
+        <item>Cairo</item>
+        <item>Giza</item>
+        <item>Alexandria</item>
+        <item>Others</item>
+
+
+    </string-array>
+
+    <string-array name="Others">
+        <item>Others</item>
+    </string-array>
+    <string-array name="Alex">
+        <item>Safia Zaghloul</item>
+        <item>Ras El Teen</item>
+        <item>Muharram</item>
+        <item>Attarine</item>
+        <item>Manshiya</item>
+        <item>Sidi Gaber</item>
+        <item>Ebrahemia </item>
+        <item>Camp Caesar </item>
+        <item>Shatby </item>
+        <item>Manshiya </item>
+        <item>Rushdie </item>
+        <item>San Stefano </item>
+        <item>Others</item>
+
+
+    </string-array>
+
+    <string-array name="Giza">
+        <item>Haram</item>
+        <item>Faisal</item>
+        <item>6 OF October</item>
+        <item>Sheikh Zayed</item>
+        <item>Dokki</item>
+        <item>Agouza</item>
+        <item>Imbaba</item>
+        <item>Met Oqba</item>
+        <item>Mohandsen</item>
+        <item>Boulaq Dakrour</item>
+        <item>Ard Lewaq</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="cairo">
+        <item>Madinet Nasr</item>
+        <item>Masr El Gedida</item>
+        <item>Sheraton</item>
+        <item>New Cairo</item>
+        <item>Down Town</item>
+        <item>Maadi</item>
+        <item>Helwan</item>
+        <item>Zamalek</item>
+        <item>Manial</item>
+        <item>Masr El Qadema</item>
+        <item>Azhar</item>
+        <item>Sayeda Zeinab</item>
+        <item>Sayeda Aisha</item>
+        <item>Hadayeq Qubba</item>
+        <item>Abbasya</item>
+        <item>Others</item>
+    </string-array>
 </resources>

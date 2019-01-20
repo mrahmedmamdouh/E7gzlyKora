@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +22,7 @@ public class Register extends AppCompatActivity {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
+    EditText a2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,7 +32,7 @@ public class Register extends AppCompatActivity {
 
         final EditText a1 = (EditText) findViewById(R.id.editEmail);
         final EditText a2 = (EditText) findViewById(R.id.editPassword);
-        final EditText a3 = (EditText) findViewById(R.id.editPassword1);
+
         Button bttn1 = (Button) findViewById(R.id.button_register_user);
         Button bttn2 = (Button) findViewById(R.id.button_back_register);
 
@@ -58,19 +59,19 @@ public class Register extends AppCompatActivity {
         bttn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent1 = new Intent(Register.this, searchActivity.class);
+                String mobile = a2.getText().toString();
+                Intent intent1 = new Intent(Register.this, com.example.android.e7gzlykora.LoginActivity.class);
+                intent1.putExtra("mobile",mobile);
                 startActivity(intent1);
+                Toast.makeText(Register.this,mobile,Toast.LENGTH_LONG).show();
 
                 String name = a1.getText().toString();
-                String mobile = a2.getText().toString();
-                String password = a3.getText().toString();
 
                 // Check for already existed userId
                 if (TextUtils.isEmpty(userId)) {
-                    createUser(name, mobile, password);
+                    createUser(name, mobile);
                 } else {
-                    updateUser(name, mobile, password);
+                    updateUser(name, mobile);
                 }
             }
         });
@@ -82,7 +83,7 @@ public class Register extends AppCompatActivity {
     /**
      * Creating new user node under 'users'
      */
-    private void createUser(String name, String mobile, String password) {
+    private void createUser(String name, String mobile) {
         // TODO
         // In real apps this userId should be fetched
         // by implementing firebase auth
@@ -90,7 +91,7 @@ public class Register extends AppCompatActivity {
             userId = mFirebaseDatabase.push().getKey();
         }
 
-        User user = new User(name, mobile, password);
+        User user = new User(name, mobile);
 
         mFirebaseDatabase.child(userId).setValue(user);
 
@@ -113,7 +114,7 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                Log.e(TAG, "User data is changed!" + user.name + ", " + user.mobile + ", " + user.password);
+                Log.e(TAG, "User data is changed!" + user.name + ", " + user.mobile);
 
 
             }
@@ -126,15 +127,13 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private void updateUser(final String name, final String mobile, final String password) {
+    private void updateUser(final String name, final String mobile) {
         // updating the user via child nodes
         if (!TextUtils.isEmpty(name))
             mFirebaseDatabase.child(userId).child("name").setValue(name);
 
         if (!TextUtils.isEmpty(mobile))
             mFirebaseDatabase.child(userId).child("mobile").setValue(mobile);
-        if (!TextUtils.isEmpty(password))
-            mFirebaseDatabase.child(userId).child("password").setValue(password);
 
         mFirebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -142,7 +141,7 @@ public class Register extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //If email exists then toast shows else store the data on new key
                     if (!data.getValue(User.class).getMobile().equals(mobile)) {
-                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(name, mobile, password));
+                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(name, mobile));
                     } else {
                         Toast.makeText(Register.this, "Mobile Number Already exists.", Toast.LENGTH_SHORT).show();
 

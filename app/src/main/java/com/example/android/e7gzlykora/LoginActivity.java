@@ -40,11 +40,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText usernametext = (EditText) findViewById(R.id.editMobilePhone);
-        EditText passwordtext = (EditText) findViewById(R.id.editLoginPassword);
+        final EditText mobilephone = (EditText) findViewById(R.id.editMobilePhone);
         Button signIn = (Button)findViewById(R.id.buttonLoginUser);
         Button backuser = (Button)findViewById(R.id.buttonBackLogin);
         TextView Signup = (TextView) findViewById(R.id.linkToSignUp);
+
+
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String a = mobilephone.getText().toString().trim();
+
+                if(a.isEmpty() || a.length() < 10){
+                    mobilephone.setError("Enter a valid mobile");
+                    mobilephone.requestFocus();
+                    return;
+                }
+
+                Intent intent = new Intent(LoginActivity.this, verifynumber.class);
+                intent.putExtra("mobile", a);
+                startActivity(intent);
+            }
+        });
+
 
 
         backuser.setOnClickListener(new View.OnClickListener() {

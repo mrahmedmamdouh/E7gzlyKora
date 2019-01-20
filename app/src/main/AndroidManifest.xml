@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.e7gzlykora">
+    <uses-permission android:name="android.permission.INTERNET" />
 
   
 
@@ -34,6 +35,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
            >
+
+        </activity>
+
+        <activity
+            android:name=".verifynumber"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
 
         </activity>
 
@@ -85,6 +95,24 @@
             >
 
         </activity>
+
+        <activity
+            android:name=".ownerprofile"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+
+        </activity>
+        <activity
+            android:name=".verifynumber_owner"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+
+        </activity>
+
         <activity
             android:name=".RegisterOwner"
             android:label="@string/app_name"
