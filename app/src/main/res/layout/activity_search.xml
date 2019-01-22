@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -10,6 +13,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Location Details"
+        android:layout_marginLeft="20dp"
         android:textSize="15sp" />
 
     <TextView
@@ -19,6 +23,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Place : "
+        android:layout_marginLeft="20dp"
         android:textSize="15sp" />
 
     <LinearLayout
@@ -56,15 +61,18 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="Date Details"
+            android:layout_marginLeft="20dp"
             android:textSize="15sp" />
 
-        <Spinner
+        <CalendarView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
+            android:id="@+id/calendar"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp">
 
-        </Spinner>
+        </CalendarView>
     </LinearLayout>
 
 
@@ -75,7 +83,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Date Type"
-        android:textSize="15sp"/>
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="354dp"
@@ -88,18 +97,22 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkbox1"
             android:checked="false"
+            android:layout_marginLeft="20dp"
             android:text="Single Time"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:onClick="check1" />
 
         <CheckBox
             android:id="@+id/checkbox2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
+            android:layout_marginLeft="75dp"
             android:text="Weekly"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:onClick="check2" />
 
 
     </LinearLayout>
@@ -110,8 +123,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="Time of Booking"
-        android:textSize="15sp"/>
+        android:layout_marginLeft="20dp"
+        android:text="Time of Booking( From/To"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="354dp"
@@ -141,7 +155,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:text="Search"
+        android:id="@+id/search"
+        android:layout_marginLeft="150dp"
         android:textSize="15sp" />
 </LinearLayout>
 
-
+</ScrollView>

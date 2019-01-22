@@ -114,6 +114,35 @@ The Goings On app, a free guide to New York City culture from the staff of The N
 
     </string-array>
 
+    <string-array name="Time">
+        <item>12:00 a.m.</item>
+        <item>01:00 a.m.</item>
+        <item>02:00 a.m.</item>
+        <item>03:00 a.m.</item>
+        <item>04:00 a.m.</item>
+        <item>05:00 a.m.</item>
+        <item>06:00 a.m.</item>
+        <item>07:00 a.m.</item>
+        <item>08:00 a.m.</item>
+        <item>09:00 a.m.</item>
+        <item>10:00 a.m.</item>
+        <item>11:00 a.m.</item>
+        <item>12:00 p.m.</item>
+        <item>01:00 p.m.</item>
+        <item>02:00 p.m.</item>
+        <item>03:00 p.m.</item>
+        <item>04:00 p.m.</item>
+        <item>05:00 p.m.</item>
+        <item>06:00 p.m.</item>
+        <item>07:00 p.m.</item>
+        <item>08:00 p.m.</item>
+        <item>09:00 p.m.</item>
+        <item>10:00 p.m.</item>
+        <item>11:00 p.m.</item>
+
+
+    </string-array>
+
     <string-array name="Giza">
         <item>Haram</item>
         <item>Faisal</item>

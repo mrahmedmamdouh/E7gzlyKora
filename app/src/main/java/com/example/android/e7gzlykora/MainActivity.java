@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        User owner = new User(name, mobile, fieldname, address, cost, zone1, zone2);
+        owner owner = new owner(name, mobile, fieldname, address, cost, zone1, zone2);
 
         mFirebaseDatabase.child(ownerId).setValue(owner);
         if (!TextUtils.isEmpty(name))
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //If email exists then toast shows else store the data on new key
                     if (!data.getValue(owner.class).getMobile().equals(mobile)) {
-                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(name, mobile, fieldname, address, cost, zone1, zone2));
+                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new owner(name, mobile, fieldname, address, cost, zone1, zone2));
                     } else {
                         Toast.makeText(MainActivity.this, "Mobile Number Already exists.", Toast.LENGTH_SHORT).show();
 

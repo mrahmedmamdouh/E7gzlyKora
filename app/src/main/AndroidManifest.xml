@@ -46,19 +46,17 @@
             >
 
         </activity>
+        <activity
+            android:name=".prospectowners"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
 
         <activity
             android:name=".searchActivity"
 
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            >
-
-
-        </activity>
-        <activity
-            android:name=".identity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -69,7 +67,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+
         </activity>
+        <activity
+            android:name=".identity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            ></activity>
         <activity
             android:name=".identity_arabic"
             android:label="@string/app_name"
@@ -121,6 +126,7 @@
             >
 
         </activity>
+
 
         <activity
             android:name=".Searcharabic"

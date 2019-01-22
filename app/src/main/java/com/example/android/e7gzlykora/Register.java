@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +31,7 @@ public class Register extends AppCompatActivity {
 
         final EditText a1 = (EditText) findViewById(R.id.editEmail);
         final EditText a2 = (EditText) findViewById(R.id.editPassword);
+
 
         Button bttn1 = (Button) findViewById(R.id.button_register_user);
         Button bttn2 = (Button) findViewById(R.id.button_back_register);
@@ -60,6 +60,9 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mobile = a2.getText().toString();
+                Intent i = new Intent(Register.this, searchActivity.class);
+                i.putExtra("mobile", mobile);
+                startActivity(i);
                 Intent intent1 = new Intent(Register.this, com.example.android.e7gzlykora.LoginActivity.class);
                 intent1.putExtra("mobile",mobile);
                 startActivity(intent1);
@@ -91,7 +94,22 @@ public class Register extends AppCompatActivity {
             userId = mFirebaseDatabase.push().getKey();
         }
 
-        User user = new User(name, mobile);
+        Intent intent1 = getIntent();
+        String fromtime = intent1.getExtras().getString("fromtime");
+        Intent intent2 = getIntent();
+        String totime = intent2.getExtras().getString("totime");
+        Intent intent3 = getIntent();
+        String zone3 = intent3.getExtras().getString("zone3");
+        Intent intent4 = getIntent();
+        String zone4 = intent4.getExtras().getString("zone4");
+        Intent intent5 = getIntent();
+        String singletime = intent5.getExtras().getString("singletime");
+        Intent intent6 = getIntent();
+        String weeklytime = intent6.getExtras().getString("weeklytime");
+        Intent intent7 = getIntent();
+        String x = intent7.getExtras().getString("x");
+
+        User user = new User(name, fromtime, totime, zone3, zone4, singletime, weeklytime, mobile, x);
 
         mFirebaseDatabase.child(userId).setValue(user);
 
@@ -141,7 +159,23 @@ public class Register extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //If email exists then toast shows else store the data on new key
                     if (!data.getValue(User.class).getMobile().equals(mobile)) {
-                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(name, mobile));
+                        Intent intent1 = getIntent();
+                        String fromtime = intent1.getExtras().getString("fromtime");
+                        Intent intent2 = getIntent();
+                        String totime = intent2.getExtras().getString("totime");
+                        Intent intent3 = getIntent();
+                        String zone3 = intent3.getExtras().getString("zone3");
+                        Intent intent4 = getIntent();
+                        String zone4 = intent4.getExtras().getString("zone4");
+                        Intent intent5 = getIntent();
+                        String singletime = intent5.getExtras().getString("singletime");
+                        Intent intent6 = getIntent();
+                        String weeklytime = intent6.getExtras().getString("weeklytime");
+                        Intent intent7 = getIntent();
+                        String x = intent7.getExtras().getString("x");
+
+
+                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(fromtime, totime, zone3, zone4, singletime, weeklytime, name, mobile, x));
                     } else {
                         Toast.makeText(Register.this, "Mobile Number Already exists.", Toast.LENGTH_SHORT).show();
 
