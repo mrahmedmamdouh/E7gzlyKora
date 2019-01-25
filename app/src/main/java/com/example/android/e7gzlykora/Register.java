@@ -109,7 +109,7 @@ public class Register extends AppCompatActivity {
         Intent intent7 = getIntent();
         String x = intent7.getExtras().getString("x");
 
-        User user = new User(name, fromtime, totime, zone3, zone4, singletime, weeklytime, mobile, x);
+        User user = new User(name, fromtime, totime, zone3, zone4, mobile, x);
 
         mFirebaseDatabase.child(userId).setValue(user);
 
@@ -175,7 +175,7 @@ public class Register extends AppCompatActivity {
                         String x = intent7.getExtras().getString("x");
 
 
-                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(fromtime, totime, zone3, zone4, singletime, weeklytime, name, mobile, x));
+                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(fromtime, totime, zone3, zone4, name, mobile, x));
                     } else {
                         Toast.makeText(Register.this, "Mobile Number Already exists.", Toast.LENGTH_SHORT).show();
 

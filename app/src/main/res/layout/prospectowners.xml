@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
 
-</LinearLayout>
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground" />
+
+    <Button
+        android:id="@+id/reserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_container"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="E7gzly" />
+
+    <RelativeLayout
+        android:id="@+id/text_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:id="@+id/fieldName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nameowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldName"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/mobileowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@android:color/black"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mobileowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@android:color/black"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@android:color/black"
+            tools:text="" />
+
+    </RelativeLayout>
+</RelativeLayout>

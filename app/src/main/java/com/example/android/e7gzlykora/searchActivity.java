@@ -3,6 +3,7 @@ package com.example.android.e7gzlykora;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.assist.AssistStructure;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,16 +33,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class searchActivity extends AppCompatActivity {
     private static final String TAG = searchActivity.class.getSimpleName();
     DatePickerDialog.OnDateSetListener mDateSetListener = null;
-    int x;
     String mobile;
     String name;
     private DatabaseReference mFirebaseDatabase;
     private String UserId;
+    private CheckBox single;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -103,6 +107,7 @@ public class searchActivity extends AppCompatActivity {
         Button search = (Button) findViewById(R.id.search);
 
 
+
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter <CharSequence> adapter3 = ArrayAdapter
                 .createFromResource(this, R.array.Time,
@@ -127,7 +132,9 @@ public class searchActivity extends AppCompatActivity {
         single.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String singletime = single.getText().toString();
+                if (single.isChecked()) {
+                    String singletime = single.getText().toString();
+                }
 
             }
         });
@@ -136,7 +143,9 @@ public class searchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final String weeklytime = weekly.getText().toString();
+                if (weekly.isChecked()) {
+                    String weeklytime = weekly.getText().toString();
+                }
 
 
             }
@@ -170,9 +179,10 @@ public class searchActivity extends AppCompatActivity {
                 month = month + 1;
                 Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
-                String date = month + "/" + day + "/" + year;
-                calendar.setDate(Long.parseLong(date));
-                int x = calendar.getDateTextAppearance();
+                String x = month + "/" + day + "/" + year;
+
+                calendar.setDate(Long.parseLong(x));
+
             }
         };
 
@@ -186,10 +196,10 @@ public class searchActivity extends AppCompatActivity {
         mFirebaseInstance.getReference("E7gzlykora").setValue("Realtime Database");
 
         search.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.KITKAT)
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(searchActivity.this, com.example.android.e7gzlykora.prospectowners.class);
+                Intent intent1 = new Intent(searchActivity.this, com.example.android.e7gzlykora.prospectowner_listview.class);
                 startActivity(intent1);
 
 
@@ -197,14 +207,11 @@ public class searchActivity extends AppCompatActivity {
                 final String totime = time2.getSelectedItem().toString();
                 final String zone3 = zone1.getSelectedItem().toString();
                 final String zone4 = zone2.getSelectedItem().toString();
-                final String singletime = single.getText().toString();
-                final String weeklytime = weekly.getText().toString();
-                String x = String.valueOf(calendar.getDateTextAppearance());
-
+                String x = String.valueOf(calendar.getDate());
 
                 // Check for already existed userId
                 if (TextUtils.isEmpty(UserId)) {
-                    createUser(fromtime, totime, zone3, zone4, singletime, weeklytime, x);
+                    createUser(fromtime, totime, zone3, zone4, x);
                 } else {
 
                 }
@@ -216,15 +223,15 @@ public class searchActivity extends AppCompatActivity {
 
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void createUser(String fromtime, String totime, String zone3, String zone4, String singletime, String weeklytime, String x) {
+    private void createUser(String fromtime, String totime, String zone3, String zone4, String x) {
         // TODO
         // In real apps this userId should be fetched
         // by implementing firebase auth
         if (TextUtils.isEmpty(UserId)) {
             UserId = mFirebaseDatabase.push().getKey();
         }
-
 
         if (!TextUtils.isEmpty(fromtime))
             mFirebaseDatabase.child(UserId).child("from").setValue(fromtime);
@@ -236,11 +243,8 @@ public class searchActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(zone4))
             mFirebaseDatabase.child(UserId).child("Zone").setValue(zone4);
-        if (!TextUtils.isEmpty(singletime))
-            mFirebaseDatabase.child(UserId).child("Single").setValue(singletime);
 
-        if (!TextUtils.isEmpty(weeklytime))
-            mFirebaseDatabase.child(UserId).child("Weekly").setValue(weeklytime);
+
 
         mFirebaseDatabase.child(UserId).child("Date").setValue(x);
 
@@ -260,11 +264,11 @@ public class searchActivity extends AppCompatActivity {
 
                 // Check for null
                 if (user == null) {
-                    Log.e(TAG, "owner data is null!");
+                    Log.e(TAG, "user data is null!");
                     return;
                 }
 
-                Log.e(TAG, "owner data is changed!" + user.fromtime + ", " + user.totime + ", " + user.zone3 + ", " + user.zone4 + ", " + user.x + ", " + user.singletime + ", " + user.weeklytime);
+                Log.e(TAG, "user data is changed!" + user.fromtime + ", " + user.totime + ", " + user.zone3 + ", " + user.zone4 + ", " + user.x);
 
 
             }
@@ -279,3 +283,4 @@ public class searchActivity extends AppCompatActivity {
 
 
 }
+

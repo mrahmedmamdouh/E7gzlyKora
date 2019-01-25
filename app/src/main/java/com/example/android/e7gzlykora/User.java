@@ -25,15 +25,13 @@ public class User {
     // DataSnapshot.getValue(User.class)
 
 
-    public User(String singletime, String weeklytime, String fromtime, String totime, String zone3, String zone4, String name, String mobile, String x) {
+    public User(String fromtime, String totime, String zone3, String zone4, String name, String mobile, String x) {
         this.name = name;
         this.mobile = mobile;
         this.fromtime = fromtime;
         this.totime = totime;
         this.zone3 = zone3;
         this.zone4 = zone4;
-        this.singletime = singletime;
-        this.weeklytime = weeklytime;
         this.x = x;
 
 
