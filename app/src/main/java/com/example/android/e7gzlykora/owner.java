@@ -2,13 +2,17 @@ package com.example.android.e7gzlykora;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 /**
  * Created by Ravi Tamada on 07/10/16.
  * www.androidhive.info
  */
 
 @IgnoreExtraProperties
-public class owner {
+public class owner extends ArrayList <owner> {
 
     public String name;
     public String mobile;
@@ -17,6 +21,7 @@ public class owner {
     public String cost;
     public String zone1;
     public String zone2;
+    private Class thisClass;
 
 
     // Default constructor required for calls to
@@ -46,11 +51,45 @@ public class owner {
 
      public String getAddress() {
         return address;
-        }
 
-public String getFieldname() {
+
+     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public void setZone1(String zone1) {
+        this.zone1 = zone1;
+    }
+
+    public void setZone2(String zone2) {
+        this.zone2 = zone2;
+    }
+
+    public void setThisClass(Class thisClass) {
+        this.thisClass = thisClass;
+    }
+
+    public String getFieldname() {
         return fieldname;
         }
+
+    public void setFieldname(String fieldname) {
+        this.fieldname = fieldname;
+    }
 
 public String getCost() {
         return cost;
