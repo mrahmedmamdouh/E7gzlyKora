@@ -6,80 +6,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/card_margin"
-        android:elevation="3dp">
 
+    <TextView
+        android:id="@+id/fieldName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:text="" />
 
-        <Button
+    <TextView
+        android:id="@+id/nameowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fieldName"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        tools:text="" />
+
+    <TextView
+        android:id="@+id/mobileowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameowner"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        tools:text="" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobileowner"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        tools:text="" />
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/address"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        tools:text="" />
+
+    <Button
         android:id="@+id/reserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
             android:layout_below="@+id/cost"
             android:layout_marginStart="230dp"
             android:layout_marginLeft="270dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:text="E7gzly"
             android:textSize="15dp" />
 
-
-        <TextView
-            android:id="@+id/fieldName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            tools:text="" />
-
-        <TextView
-            android:id="@+id/nameowner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fieldName"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
-            android:text=""
-            android:textColor="@android:color/black"
-            tools:text="" />
-
-        <TextView
-            android:id="@+id/mobileowner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nameowner"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
-            android:textColor="@android:color/black"
-            tools:text="" />
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mobileowner"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
-            android:textColor="@android:color/black"
-            tools:text="" />
-
-        <TextView
-            android:id="@+id/cost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/address"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
-            android:textColor="@android:color/black"
-            tools:text="" />
-    </android.support.v7.widget.CardView>
 
 </LinearLayout>
