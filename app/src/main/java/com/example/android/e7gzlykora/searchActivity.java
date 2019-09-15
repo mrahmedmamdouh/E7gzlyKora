@@ -247,8 +247,6 @@ public class searchActivity extends AppCompatActivity {
 
 
         mFirebaseDatabase.child(UserId).child("Date").setValue(x);
-
-
         addUserChangeListener();
     }
 
@@ -268,7 +266,7 @@ public class searchActivity extends AppCompatActivity {
                     return;
                 }
 
-                Log.e(TAG, "user data is changed!" + user.fromtime + ", " + user.totime + ", " + user.zone3 + ", " + user.zone4 + ", " + user.x);
+//                Log.e(TAG, "user data is changed!" + user.fromtime + ", " + user.totime + ", " + user.zone3 + ", " + user.zone4 + ", " + user.x);
 
 
             }

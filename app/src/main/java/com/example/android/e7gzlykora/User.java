@@ -10,41 +10,116 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
 
-    public String name;
-    public String mobile;
-    public String fromtime;
-    public String totime;
-    public String zone3;
-    public String zone4;
-    public String singletime;
-    public String weeklytime;
-    public String x;
+    public String Area ;
+    public String Date ;
+    public String Zone ;
+    public String FromTime ;
+    public String ToTime ;
+    public String UserGUID ;
+    public String SingleTime;
+    public String WeeklyTime;
 
 
-    // Default constructor required for calls to
-    // DataSnapshot.getValue(User.class)
-
-
-    public User(String fromtime, String totime, String zone3, String zone4, String name, String mobile, String x) {
-        this.name = name;
-        this.mobile = mobile;
-        this.fromtime = fromtime;
-        this.totime = totime;
-        this.zone3 = zone3;
-        this.zone4 = zone4;
-        this.x = x;
+    public User(){
 
 
     }
 
-    public User() {
+    public String getFromTime() {
+        return FromTime;
     }
-    public String getMobile() {
-        return mobile;
+
+    public void setFromTime(String fromTime) {
+        FromTime = fromTime;
+    }
+
+    public String getToTime() {
+        return ToTime;
+    }
+
+    public void setToTime(String toTime) {
+        ToTime = toTime;
+    }
+
+    public String getSingleTime() {
+        return SingleTime;
+    }
+
+    public void setSingleTime(String singleTime) {
+        SingleTime = singleTime;
+    }
+
+    public String getWeeklyTime() {
+        return WeeklyTime;
+    }
+
+    public void setWeeklyTime(String weeklyTime) {
+        WeeklyTime = weeklyTime;
+    }
+
+    public User(String area, String date, String zone, String from, String to, String userGUID, String SingleTime, String WeeklyTime) {
+        Area = area;
+        Date = date;
+        Zone = zone;
+        FromTime = from;
+        ToTime = to;
+        UserGUID = userGUID;
+        this.SingleTime=SingleTime;
+        this.WeeklyTime=WeeklyTime;
+    }
+
+
+
+
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String area) {
+        Area = area;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getZone() {
+        return Zone;
+    }
+
+    public void setZone(String zone) {
+        Zone = zone;
+    }
+
+    public String getFrom() {
+        return FromTime;
+    }
+
+    public void setFrom(String from) {
+        FromTime = from;
+    }
+
+    public String getTo() {
+        return ToTime;
+    }
+
+    public void setTo(String to) {
+        ToTime = to;
+    }
+
+    public String getUserGUID() {
+        return UserGUID;
+    }
+
+    public void setUserGUID(String userGUID) {
+        UserGUID = userGUID;
     }
 }
-
-
 
 
 

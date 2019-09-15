@@ -93,9 +93,9 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         public MyViewHolder(View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name);
-            this.field = itemView.findViewById(R.id.fieldName);
+            this.field = itemView.findViewById(R.id.fieldNameowner);
             this.mobile = itemView.findViewById(R.id.mobileowner);
-            this.address = itemView.findViewById(R.id.address);
+            this.address = itemView.findViewById(R.id.addressowner);
             this.cost = itemView.findViewById(R.id.cost);
             this.bttn = itemView.findViewById(R.id.reserve);
         }

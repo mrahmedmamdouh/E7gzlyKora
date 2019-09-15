@@ -10,33 +10,41 @@ import android.widget.TextView;
 
 public class Loginowner extends AppCompatActivity {
 
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_owner);
 
-        final EditText mobilephone = (EditText) findViewById(R.id.editMobilePhone);
+        final EditText UserName = (EditText) findViewById(R.id.UserName);
+        final EditText password = (EditText) findViewById(R.id.Password);
         Button signIn = (Button)findViewById(R.id.buttonLoginUser);
         Button backuser = (Button)findViewById(R.id.buttonBackLogin);
         TextView Signup = (TextView) findViewById(R.id.linkToSignUp);
+         userName = getIntent().getStringExtra("UserName");
+        UserName.setText(userName);
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = mobilephone.getText().toString().trim();
+
+                String a = password.getText().toString().trim();
 
                 if(a.isEmpty() || a.length() < 10){
-                    mobilephone.setError("Enter a valid mobile");
-                    mobilephone.requestFocus();
+                    password.setError("Enter a valid mobile");
+                    password.requestFocus();
                     return;
                 }
 
-                Intent intent = new Intent(Loginowner.this, verifynumber_owner.class);
-                intent.putExtra("mobile", a);
-                startActivity(intent);
+                Intent i = new Intent(Loginowner.this, searchActivity.class);
+                i.putExtra("Password", a);
+                i.putExtra("mobile", getIntent().getStringExtra("mobile"));
+                i.putExtra("Name",getIntent().getStringExtra("Name"));
+                i.putExtra("Password",getIntent().getStringExtra("Password"));
+                i.putExtra("UserName",userName);
+                i.putExtra("UserType",getIntent().getStringExtra("UserType"));
+                startActivity(i);
             }
         });
 
@@ -49,23 +57,13 @@ public class Loginowner extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i1 = new Intent(Loginowner.this, MainActivity.class);
+                Intent i1 = new Intent(Loginowner.this, RegisterOwner.class);
                 startActivity(i1);
             }
         });
-
-
-
-
-
-
-
-
-
 
     }
 

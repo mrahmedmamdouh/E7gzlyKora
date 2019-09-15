@@ -124,7 +124,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:text="Time of Booking( From/To"
+        android:text="Time of Booking( From/To)"
         android:textSize="15sp" />
 
     <LinearLayout

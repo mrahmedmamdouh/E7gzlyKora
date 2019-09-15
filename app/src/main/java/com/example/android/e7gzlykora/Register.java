@@ -1,27 +1,41 @@
 package com.example.android.e7gzlykora;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.OkHttpResponseListener;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import okhttp3.Response;
+
 public class Register extends AppCompatActivity {
 
-    private static final String TAG = Register.class.getSimpleName();
-    private DatabaseReference mFirebaseDatabase;
-    private FirebaseDatabase mFirebaseInstance;
-    private String userId;
-    EditText a2;
+    private String Name,Password,UserName,Mobile;
+    private Integer UserType;
+    EditText a1,a2,a3,a4;
+    private String TAG = "Register.class";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,53 +43,37 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_layout);
 
-        final EditText a1 = (EditText) findViewById(R.id.editEmail);
-        final EditText a2 = (EditText) findViewById(R.id.editPassword);
+          a1 = findViewById(R.id.Name);
+          a2 = findViewById(R.id.Password);
+          a3 = findViewById(R.id.UserName);
+          a4 = findViewById(R.id.Mobile);
 
 
-        Button bttn1 = (Button) findViewById(R.id.button_register_user);
-        Button bttn2 = (Button) findViewById(R.id.button_back_register);
+        Button bttn1 =  findViewById(R.id.button_register_user);
+        Button bttn2 =  findViewById(R.id.button_back_register);
+
 
         bttn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this,LoginActivity.class);
+                Intent intent = new Intent(Register.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
-
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-
-        // get reference to 'users' node
-        mFirebaseDatabase = mFirebaseInstance.getReference("users");
-
-        // store app title to 'app_title' node
-        mFirebaseInstance.getReference("E7gzlykora").setValue("Realtime Database");
-
 
 
         // Save / update the user
         bttn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mobile = a2.getText().toString();
-                Intent i = new Intent(Register.this, searchActivity.class);
-                i.putExtra("mobile", mobile);
-                startActivity(i);
-                Intent intent1 = new Intent(Register.this, com.example.android.e7gzlykora.LoginActivity.class);
-                intent1.putExtra("mobile",mobile);
-                startActivity(intent1);
-                Toast.makeText(Register.this,mobile,Toast.LENGTH_LONG).show();
+                Name = a1.getText().toString();
+                Password = a2.getText().toString();
+                UserName = a3.getText().toString();
+                Mobile = a4.getText().toString();
+                UserType = 101;
 
-                String name = a1.getText().toString();
+                createUser(Name,UserName,Password,Mobile,UserType);
 
-                // Check for already existed userId
-                if (TextUtils.isEmpty(userId)) {
-                    createUser(name, mobile);
-                } else {
-                    updateUser(name, mobile);
-                }
             }
         });
 
@@ -86,109 +84,51 @@ public class Register extends AppCompatActivity {
     /**
      * Creating new user node under 'users'
      */
-    private void createUser(String name, String mobile) {
-        // TODO
-        // In real apps this userId should be fetched
-        // by implementing firebase auth
-        if (TextUtils.isEmpty(userId)) {
-            userId = mFirebaseDatabase.push().getKey();
+    private void createUser(final String Name, final String UserName, final String Password, final String Mobile, final Integer UserType) {
+
+        TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
         }
-
-        Intent intent1 = getIntent();
-        String fromtime = intent1.getExtras().getString("fromtime");
-        Intent intent2 = getIntent();
-        String totime = intent2.getExtras().getString("totime");
-        Intent intent3 = getIntent();
-        String zone3 = intent3.getExtras().getString("zone3");
-        Intent intent4 = getIntent();
-        String zone4 = intent4.getExtras().getString("zone4");
-        Intent intent5 = getIntent();
-        String singletime = intent5.getExtras().getString("singletime");
-        Intent intent6 = getIntent();
-        String weeklytime = intent6.getExtras().getString("weeklytime");
-        Intent intent7 = getIntent();
-        String x = intent7.getExtras().getString("x");
-
-        User user = new User(name, fromtime, totime, zone3, zone4, mobile, x);
-
-        mFirebaseDatabase.child(userId).setValue(user);
-
-        addUserChangeListener();
-    }
-
-    /**
-     * User data change listener
-     */
-    private void addUserChangeListener() {
-        // User data change listener
-        mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-
-                // Check for null
-                if (user == null) {
-                    Log.e(TAG, "User data is null!");
-                    return;
-                }
-
-                Log.e(TAG, "User data is changed!" + user.name + ", " + user.mobile);
+        @SuppressLint("HardwareIds") String UserGUID = tManager.getDeviceId();
+        Auth auth = new Auth(UserName,Password,Name,UserGUID,Mobile,UserType);
 
 
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.e(TAG, "Failed to read user", error.toException());
-            }
-        });
-    }
-
-    private void updateUser(final String name, final String mobile) {
-        // updating the user via child nodes
-        if (!TextUtils.isEmpty(name))
-            mFirebaseDatabase.child(userId).child("name").setValue(name);
-
-        if (!TextUtils.isEmpty(mobile))
-            mFirebaseDatabase.child(userId).child("mobile").setValue(mobile);
-
-        mFirebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //If email exists then toast shows else store the data on new key
-                    if (!data.getValue(User.class).getMobile().equals(mobile)) {
-                        Intent intent1 = getIntent();
-                        String fromtime = intent1.getExtras().getString("fromtime");
-                        Intent intent2 = getIntent();
-                        String totime = intent2.getExtras().getString("totime");
-                        Intent intent3 = getIntent();
-                        String zone3 = intent3.getExtras().getString("zone3");
-                        Intent intent4 = getIntent();
-                        String zone4 = intent4.getExtras().getString("zone4");
-                        Intent intent5 = getIntent();
-                        String singletime = intent5.getExtras().getString("singletime");
-                        Intent intent6 = getIntent();
-                        String weeklytime = intent6.getExtras().getString("weeklytime");
-                        Intent intent7 = getIntent();
-                        String x = intent7.getExtras().getString("x");
-
-
-                        mFirebaseDatabase.child(mFirebaseDatabase.push().getKey()).setValue(new User(fromtime, totime, zone3, zone4, name, mobile, x));
-                    } else {
-                        Toast.makeText(Register.this, "Mobile Number Already exists.", Toast.LENGTH_SHORT).show();
-
-
+        AndroidNetworking.post("http://192.168.1.94:8089/api/Auth/ExportData")
+                .addBodyParameter(auth)
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "onResponse: "+ response);
+                        Intent i = new Intent(Register.this, LoginActivity.class);
+                        i.putExtra("mobile", Mobile);
+                        i.putExtra("Name",Name);
+                        i.putExtra("Password",Password);
+                        i.putExtra("UserName",UserName);
+                        i.putExtra("UserType",UserType);
+                        startActivity(i);
                     }
 
-                }
-            }
+                    @Override
+                    public void onError(ANError anError) {
 
-            @Override
-            public void onCancelled(final DatabaseError databaseError) {
-            }
-        });
+                    }
+                });
+
     }
 
-}
+
+
+    }
+

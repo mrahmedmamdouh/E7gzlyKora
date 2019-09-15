@@ -32,34 +32,42 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText mobilephone = (EditText) findViewById(R.id.editMobilePhone);
+        final EditText UserName = (EditText) findViewById(R.id.UserName);
+        final EditText password = (EditText) findViewById(R.id.Password);
         Button signIn = (Button)findViewById(R.id.buttonLoginUser);
         Button backuser = (Button)findViewById(R.id.buttonBackLogin);
         TextView Signup = (TextView) findViewById(R.id.linkToSignUp);
+         userName = getIntent().getStringExtra("UserName");
+        UserName.setText(userName);
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = mobilephone.getText().toString().trim();
+
+                String a = password.getText().toString().trim();
 
                 if(a.isEmpty() || a.length() < 10){
-                    mobilephone.setError("Enter a valid mobile");
-                    mobilephone.requestFocus();
+                    password.setError("Enter a valid mobile");
+                    password.requestFocus();
                     return;
                 }
 
-                Intent intent = new Intent(LoginActivity.this, verifynumber.class);
-                intent.putExtra("mobile", a);
-                startActivity(intent);
+                Intent i = new Intent(LoginActivity.this, searchActivity.class);
+                i.putExtra("Password", a);
+                i.putExtra("mobile", getIntent().getStringExtra("mobile"));
+                i.putExtra("Name",getIntent().getStringExtra("Name"));
+                i.putExtra("Password",getIntent().getStringExtra("Password"));
+                i.putExtra("UserName",userName);
+                i.putExtra("UserType",getIntent().getStringExtra("UserType"));
+                startActivity(i);
             }
         });
 
@@ -79,15 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i1);
             }
         });
-
-
-
-
-
-
-
-
-
 
     }
 

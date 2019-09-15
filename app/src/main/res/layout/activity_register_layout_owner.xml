@@ -30,7 +30,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"></LinearLayout>
+            android:layout_weight="0.1">
+
+        </LinearLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -42,61 +44,49 @@
             android:hint="Name"
             android:inputType="textPersonName"
             android:text=""
-            android:id="@+id/editName"
-            >
-
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            >
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.8"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="text"
-            android:text=""
-
-            />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
             >
             <EditText
-                android:id="@+id/editPassword"
+                android:id="@+id/Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.8"
                 android:ems="10"
-                android:hint="Mobile Phone"
-                android:inputType="number"
+                android:hint="Name"
+                android:inputType="text"
                 android:text=""
 
                 />
         </android.support.design.widget.TextInputLayout>
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:weightSum="3"
-            android:orientation="horizontal">
 
+            >
             <EditText
-                android:id="@+id/editPassword1"
+                android:id="@+id/UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:ems="10"
+                android:hint="UserName"
+                android:inputType="text"
+                android:text=""
+
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            >
+            <EditText
+                android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.8"
@@ -106,8 +96,28 @@
                 android:text=""
 
                 />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            >
+            <EditText
+                android:id="@+id/Mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:ems="10"
+                android:hint="Mobile"
+                android:inputType="text"
+                android:text=""
+
+                />
+        </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -131,11 +141,11 @@
         </LinearLayout>
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="0.1"-->
-            <!--android:weightSum = "3"-->
-            <!--&gt;-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="0.1"-->
+        <!--android:weightSum = "3"-->
+        <!--&gt;-->
 
         <!--</LinearLayout>-->
         <LinearLayout

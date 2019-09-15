@@ -36,20 +36,44 @@
             android:layout_marginRight="10dp"
             >
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text=""
-            android:hint="Mobile Phone"
-            android:alpha="0.8"
-            android:ems="10"
-            android:id="@+id/editMobilePhone"
-            />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text=""
+                android:hint="UserName"
+                android:alpha="0.8"
+                android:ems="10"
+                android:id="@+id/UserName"
+                />
+
 
 
 
         </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text=""
+                android:hint="Password"
+                android:alpha="0.8"
+                android:ems="10"
+                android:id="@+id/Password"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,7 +91,7 @@
                 android:layout_weight="1.7"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
-                android:text="Already have an account?"
+                android:text="Create new account?"
                 android:layout_gravity="center"
                 android:ems="10"
                 android:layout_marginRight="10dp"
