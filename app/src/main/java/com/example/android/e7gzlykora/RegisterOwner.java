@@ -61,6 +61,13 @@ public class RegisterOwner extends AppCompatActivity {
             public void onClick(View view) {
                 Name = a1.getText().toString();
                 Password = a2.getText().toString();
+                String a = a2.getText().toString().trim();
+
+                if(a.isEmpty() || a.length() < 6){
+                    a2.setError("Enter a valid Password");
+                    a2.requestFocus();
+                    return;
+                }
                 UserName = a3.getText().toString();
                 Mobile = a4.getText().toString();
                 UserType = 102;
@@ -105,18 +112,22 @@ public class RegisterOwner extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse: "+ response);
-                        Intent i = new Intent(RegisterOwner.this, LoginActivity.class);
-                        i.putExtra("mobile", Mobile);
-                        i.putExtra("Name",Name);
-                        i.putExtra("Password",Password);
-                        i.putExtra("UserName",UserName);
-                        i.putExtra("UserType",UserType);
-                        startActivity(i);
+                        if(response.equals("User has been added successfully")){
+                            Intent i = new Intent(RegisterOwner.this, LoginActivity.class);
+                            i.putExtra("mobile", Mobile);
+                            i.putExtra("Name",Name);
+                            i.putExtra("Password",Password);
+                            i.putExtra("UserName",UserName);
+                            i.putExtra("UserType",UserType);
+                            startActivity(i);} else{
+
+                            Toast.makeText(getApplicationContext(),"UserName Already Exists",Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-
+                        Toast.makeText(getApplicationContext(),anError.getErrorBody(),Toast.LENGTH_SHORT).show();
                     }
                 });
 
