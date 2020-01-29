@@ -1,12 +1,12 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.model;
 
 public class Auth {
-
+    private static Auth auth;
 
     public Auth(String userName, String password, String name,String UserGUID,String Mobile,Integer UserType) {
-        UserName = userName;
-        Password = password;
-        Name = name;
+        this.UserName = userName;
+        this.Password = password;
+        this.Name = name;
         this.UserGUID = UserGUID;
         this.Mobile = Mobile;
         this.UserType = UserType;
@@ -18,6 +18,8 @@ public class Auth {
     private String UserGUID;
     private String Mobile;
     private Integer UserType;
+
+    public Auth() {}
 
     public Integer getUserType() {
         return UserType;
@@ -65,5 +67,14 @@ public class Auth {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public static Auth getInstance () {
+        if (auth != null) {
+            return auth;
+        } else {
+            auth = new Auth();
+            return auth;
+        }
     }
 }

@@ -15,7 +15,6 @@ public class identity extends AppCompatActivity {
 
         Button bttn1 = (Button) findViewById(R.id.button);
         Button bttn2 = (Button) findViewById(R.id.button2);
-        Button bttn3 = (Button) findViewById(R.id.button4);
 
         bttn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,13 +29,6 @@ public class identity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent1);
-            }
-        });
-        bttn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(getApplicationContext(),identity_arabic.class);
-                startActivity(intent2);
             }
         });
 

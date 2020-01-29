@@ -1,22 +1,16 @@
 package com.example.android.e7gzlykora;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.assist.AssistStructure;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,15 +19,23 @@ import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.example.android.e7gzlykora.model.Auth;
+import com.example.android.e7gzlykora.model.Bookings;
+import com.example.android.e7gzlykora.model.Owner;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,20 +45,22 @@ public class searchActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener mDateSetListener = null;
     String mobile;
     String name;
-    private DatabaseReference mFirebaseDatabase;
-    private String UserId;
-    private CheckBox single;
-
+    private int year, month, day;
+    private Calendar now;
+    public static Date date;
+    private String WeeklyTime,SingleTime;
+    Button chooseDate;
     @Override
     public void onCreate(Bundle icicle) {
-
-
         super.onCreate(icicle);
         setContentView(R.layout.activity_search);
-
+        now = java.util.Calendar.getInstance();
+        year = now.get(java.util.Calendar.YEAR);
+        month = now.get(java.util.Calendar.MONTH);
+        day = now.get(Calendar.DAY_OF_MONTH);
         final Spinner zone1 = (Spinner) findViewById(R.id.spinner);
         final Spinner zone2 = (Spinner) findViewById(R.id.spinner2);
-
+        chooseDate = findViewById(R.id.chooseDate);
         String[] items = new String[]{"Cairo", "Giza", "Alexandria", "Others"};
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter <String> adapter = new ArrayAdapter <String>(searchActivity.this, android.R.layout.simple_spinner_item, items);
@@ -72,8 +76,6 @@ public class searchActivity extends AppCompatActivity {
                                        int position, long id) {
 
                 if (zone1.getSelectedItem().equals("Cairo")) {
-
-
                     ArrayAdapter adapter2 = ArrayAdapter.createFromResource(searchActivity.this,
                             R.array.cairo, android.R.layout.simple_spinner_item);
                     zone2.setAdapter(adapter2);
@@ -133,7 +135,7 @@ public class searchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (single.isChecked()) {
-                    String singletime = single.getText().toString();
+                     SingleTime = single.getText().toString();
                 }
 
             }
@@ -144,141 +146,82 @@ public class searchActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (weekly.isChecked()) {
-                    String weeklytime = weekly.getText().toString();
+                     WeeklyTime = weekly.getText().toString();
                 }
 
 
             }
         });
-        final CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
+//        final CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
+////
+////        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+////
+////            @Override
+////            public void onSelectedDayChange(CalendarView view, int year, int month,
+////                                            int dayOfMonth) {
+////                int d = dayOfMonth;
+////                date = month + "/" + d + "/" + year;
+////            }
+////        });
 
 
-        calendar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+        chooseDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+            public void onClick(View view) {
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        searchActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(searchActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                        String picker = dayOfMonth + "-" + (month + 1) + "-" + year;
+                        date = null;
+                        try {
+                            date = formatter.parse(picker);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.d("=====", String.valueOf(date));
+                        chooseDate.setText(formatter.format(date));
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
             }
         });
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
-
-                String x = month + "/" + day + "/" + year;
-
-                calendar.setDate(Long.parseLong(x));
-
-            }
-        };
-
-
-        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
-
-        // get reference to 'users' node
-        mFirebaseDatabase = mFirebaseInstance.getReference("users");
-
-        // store app title to 'app_title' node
-        mFirebaseInstance.getReference("E7gzlykora").setValue("Realtime Database");
 
         search.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(searchActivity.this, com.example.android.e7gzlykora.prospectowner_listview.class);
-                startActivity(intent1);
-
-
                 final String fromtime = time1.getSelectedItem().toString();
                 final String totime = time2.getSelectedItem().toString();
                 final String zone3 = zone1.getSelectedItem().toString();
                 final String zone4 = zone2.getSelectedItem().toString();
-                String x = String.valueOf(calendar.getDate());
-
-                // Check for already existed userId
-                if (TextUtils.isEmpty(UserId)) {
-                    createUser(fromtime, totime, zone3, zone4, x);
-                } else {
-
+                Intent intent1 = new Intent(searchActivity.this, com.example.android.e7gzlykora.prospectowner_listview.class);
+                Bookings.getInstance().setZone1(zone3);
+                Bookings.getInstance().setZone2(zone4);
+                Bookings.getInstance().setBookingTimeFrom(fromtime);
+                Bookings.getInstance().setBookingTimeTo(totime);
+                if (SingleTime != null) {
+                    Bookings.getInstance().setDateTypes(SingleTime);
+                }else if (WeeklyTime != null){
+                    Bookings.getInstance().setDateTypes(WeeklyTime);
+                }else  {
+                    Bookings.getInstance().setDateTypes(SingleTime);
                 }
+                Bookings.getInstance().setDateDetails(String.valueOf(date));
+                Bookings.getInstance().setUserMobile(Auth.getInstance().getMobile());
+                Bookings.getInstance().setUserName(Auth.getInstance().getUserName());
+                Bookings.getInstance().setNameUser(Auth.getInstance().getName());
+                startActivity(intent1);
             }
         });
 
-        return;
+
 
 
     }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void createUser(String fromtime, String totime, String zone3, String zone4, String x) {
-        // TODO
-        // In real apps this userId should be fetched
-        // by implementing firebase auth
-        if (TextUtils.isEmpty(UserId)) {
-            UserId = mFirebaseDatabase.push().getKey();
-        }
-
-        if (!TextUtils.isEmpty(fromtime))
-            mFirebaseDatabase.child(UserId).child("from").setValue(fromtime);
-
-        if (!TextUtils.isEmpty(totime))
-            mFirebaseDatabase.child(UserId).child("to").setValue(totime);
-        if (!TextUtils.isEmpty(zone3))
-            mFirebaseDatabase.child(UserId).child("Area").setValue(zone3);
-
-        if (!TextUtils.isEmpty(zone4))
-            mFirebaseDatabase.child(UserId).child("Zone").setValue(zone4);
-
-
-
-        mFirebaseDatabase.child(UserId).child("Date").setValue(x);
-        addUserChangeListener();
-    }
-
-    /**
-     * User data change listener
-     */
-    private void addUserChangeListener() {
-        // User data change listener
-        mFirebaseDatabase.child(UserId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-
-                // Check for null
-                if (user == null) {
-                    Log.e(TAG, "user data is null!");
-                    return;
-                }
-
-//                Log.e(TAG, "user data is changed!" + user.fromtime + ", " + user.totime + ", " + user.zone3 + ", " + user.zone4 + ", " + user.x);
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.e(TAG, "Failed to read user", error.toException());
-            }
-        });
-    }
-
-
 }
 

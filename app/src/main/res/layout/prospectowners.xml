@@ -73,7 +73,7 @@
         android:id="@+id/reserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-            android:layout_below="@+id/cost"
+        android:layout_below="@+id/costowner"
         android:onClick="reserve"
             android:layout_marginStart="230dp"
             android:layout_marginLeft="270dp"

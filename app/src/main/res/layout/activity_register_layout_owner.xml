@@ -45,7 +45,7 @@
             android:inputType="textPersonName"
             android:text=""
             >
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:inputType="text"
                 android:text=""
 
-                />
+                android:importantForAutofill="no" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
             android:layout_marginRight="10dp"
 
             >
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/UserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,8 +74,7 @@
                 android:hint="UserName"
                 android:inputType="text"
                 android:text=""
-
-                />
+                android:importantForAutofill="no" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -85,7 +84,7 @@
             android:layout_marginRight="10dp"
 
             >
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,8 +93,7 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:text=""
-
-                />
+                android:importantForAutofill="no" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -106,7 +104,7 @@
             android:layout_marginRight="10dp"
 
             >
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/Mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +114,7 @@
                 android:inputType="text"
                 android:text=""
 
-                />
+                android:importantForAutofill="no" />
         </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,9 +131,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="match_parent"
-                android:id="@+id/button_register_user"
+                android:id="@+id/button_register_owner"
                 android:text="Register"
-
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="center" />
         </LinearLayout>
@@ -163,8 +160,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_height="match_parent"
-                android:id="@+id/button_back_register"
-                android:elevation="10dp"
+                android:id="@+id/button_back_register_owner"
                 android:text="Back"
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="center" />

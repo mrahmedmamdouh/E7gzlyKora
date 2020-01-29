@@ -79,6 +79,8 @@ The Goings On app, a free guide to New York City culture from the staff of The N
 
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
+    <string name="choose_date">Choose date</string>
+    <string name="search">Search</string>
     <string-array name="duration_dropdown_arrays">
         <item>60 minutes</item>
         <item>120 minutes</item>

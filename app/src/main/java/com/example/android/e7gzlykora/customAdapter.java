@@ -1,47 +1,25 @@
 package com.example.android.e7gzlykora;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.squareup.picasso.Picasso;
+import com.example.android.e7gzlykora.model.Owner;
 
-import org.w3c.dom.Text;
-
-import java.security.acl.Owner;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-
-import butterknife.ButterKnife;
 
 
 public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHolder> {
 
-    private final ArrayList <owner> ownerlist;
+    private final ArrayList <Owner> ownerlist;
     private Context mContext;
 
-    public customAdapter(Context c, ArrayList <owner> p) {
+    public customAdapter(Context c, ArrayList <Owner> p) {
         this.mContext = c;
         this.ownerlist = p;
     }
@@ -55,15 +33,21 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        owner owner = ownerlist.get(position);
-
+        final Owner owner = ownerlist.get(position);
         holder.name.setText(owner.getName());
-        holder.field.setText(owner.getFieldname());
+        holder.field.setText(owner.getFieldName());
         holder.mobile.setText(owner.getMobile());
         holder.address.setText(owner.getAddress());
-        holder.cost.setText(owner.getCost());
+        holder.cost.setText(String.valueOf(owner.getCost()));
+
+        holder.bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prospectowner_listview.Book(owner.getName(),owner.getMobile(),owner.getFieldName(),position,ownerlist);
+            }
+        });
     }
 
     @Override
@@ -71,7 +55,7 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         return ownerlist.size();
     }
 
-    public void addData(ArrayList <owner> newData) {
+    public void addData(ArrayList <Owner> newData) {
         this.ownerlist.addAll(newData);
         notifyOnDataSetChanged();
     }
@@ -92,11 +76,11 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.name = itemView.findViewById(R.id.name);
+            this.name = itemView.findViewById(R.id.nameowner);
             this.field = itemView.findViewById(R.id.fieldNameowner);
             this.mobile = itemView.findViewById(R.id.mobileowner);
             this.address = itemView.findViewById(R.id.addressowner);
-            this.cost = itemView.findViewById(R.id.cost);
+            this.cost = itemView.findViewById(R.id.costowner);
             this.bttn = itemView.findViewById(R.id.reserve);
         }
     }

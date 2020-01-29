@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="56dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Date:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_date"
+        android:layout_width="97dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_time_from"
+        android:layout_width="97dp"
+        android:layout_height="22dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/item_date"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/item_time_to"
+        android:layout_width="97dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="84dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="97dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/confirm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/item_time_from"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <TextView
+        android:id="@+id/item_mobile"
+        android:layout_width="97dp"
+        android:layout_height="22dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/item_name"
+        app:layout_constraintTop_toTopOf="@+id/reject" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From:"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/item_time_from" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="84dp"
+        android:text="To:"
+        app:layout_constraintStart_toEndOf="@+id/item_time_from"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name :"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/item_name" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile No :"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/item_mobile" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_time_to" />
+
+    <Button
+        android:id="@+id/reject"
+        android:layout_width="89dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:text="Reject"
+        app:layout_constraintStart_toStartOf="@+id/confirm"
+        app:layout_constraintTop_toBottomOf="@+id/confirm" />
+</android.support.constraint.ConstraintLayout>

@@ -1,13 +1,11 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
  * Created by Ravi Tamada on 07/10/16.
  * www.androidhive.info
  */
 
-@IgnoreExtraProperties
 public class User {
 
     public String Area ;

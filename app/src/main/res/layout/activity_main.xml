@@ -23,7 +23,7 @@
         >
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
@@ -73,7 +73,7 @@
         >
 
         <EditText
-            android:id="@+id/editEmail1"
+            android:id="@+id/editField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -99,7 +99,7 @@
         >
 
         <EditText
-            android:id="@+id/editEmail2"
+            android:id="@+id/editAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -125,7 +125,7 @@
         >
 
         <EditText
-            android:id="@+id/editEmail3"
+            android:id="@+id/editCost"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -156,14 +156,14 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/zone1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:theme="@android:style/Theme.Holo.Light" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/zone2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

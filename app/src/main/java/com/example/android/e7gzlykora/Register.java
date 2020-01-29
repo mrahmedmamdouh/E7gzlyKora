@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,27 +19,19 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.OkHttpResponseListener;
 import com.androidnetworking.interfaces.StringRequestListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import okhttp3.Response;
+import com.example.android.e7gzlykora.model.Auth;
 
 public class Register extends AppCompatActivity {
 
-    private String Name,Password,UserName,Mobile;
+    private String Name,Password,UserName,Mobile,UserGUID;
     private Integer UserType;
     EditText a1,a2,a3,a4;
     private String TAG = "Register.class";
 
+    @SuppressLint("HardwareIds")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_layout);
 
@@ -47,8 +39,8 @@ public class Register extends AppCompatActivity {
           a2 = findViewById(R.id.Password);
           a3 = findViewById(R.id.UserName);
           a4 = findViewById(R.id.Mobile);
-
-
+        UserGUID = Settings.Secure.getString(Register.this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         Button bttn1 =  findViewById(R.id.button_register_user);
         Button bttn2 =  findViewById(R.id.button_back_register);
 
@@ -84,7 +76,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        return;
     }
 
 
@@ -93,23 +84,11 @@ public class Register extends AppCompatActivity {
      */
     private void createUser(final String Name, final String UserName, final String Password, final String Mobile, final Integer UserType) {
 
-        TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        @SuppressLint("HardwareIds") String UserGUID = tManager.getDeviceId();
         Auth auth = new Auth(UserName,Password,Name,UserGUID,Mobile,UserType);
 
 
 
-        AndroidNetworking.post("http://192.168.1.94:8089/api/Auth/ExportData")
+        AndroidNetworking.post("http://192.168.2.222:8089/api/Auth/ExportData")
                 .addBodyParameter(auth)
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -118,7 +97,7 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse: "+ response);
-                        if(response.equals("User has been added successfully")){
+                        if(response.equals("\"User has been added successfully\"")){
                         Intent i = new Intent(Register.this, LoginActivity.class);
                         i.putExtra("mobile", Mobile);
                         i.putExtra("Name",Name);
@@ -126,7 +105,6 @@ public class Register extends AppCompatActivity {
                         i.putExtra("UserName",UserName);
                         i.putExtra("UserType",UserType);
                         startActivity(i);} else{
-
                             Toast.makeText(getApplicationContext(),"UserName Already Exists",Toast.LENGTH_SHORT).show();
                         }
                     }
