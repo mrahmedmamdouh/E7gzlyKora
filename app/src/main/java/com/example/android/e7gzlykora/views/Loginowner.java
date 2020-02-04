@@ -1,13 +1,12 @@
 package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -15,6 +14,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.ActivityLoginOwnerBinding;
 import com.example.android.e7gzlykora.model.Auth;
 
 import org.json.JSONArray;
@@ -23,55 +23,72 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class Loginowner extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
-    String userName;
-    private EditText UserName,password;
+public class Loginowner extends Fragment {
+
+    private ActivityLoginOwnerBinding binding;
+
+    public Loginowner(ActivityLoginOwnerBinding binding) {
+        this.binding = binding;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_owner);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_identity, container, false);
+    }
 
-         UserName =  findViewById(R.id.UserName);
-         password =  findViewById(R.id.Password);
-        Button signIn = findViewById(R.id.buttonLoginUser);
-        Button backuser = findViewById(R.id.buttonBackLogin);
-        TextView Signup =  findViewById(R.id.linkToSignUp);
-        userName = getIntent().getStringExtra("UserName");
-        UserName.setText(userName);
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+        onClick();
+    }
 
 
-        signIn.setOnClickListener(new View.OnClickListener() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void init() {
+        String userName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("UserName");
+        binding.UserName.setText(userName);
+    }
+
+    private void onClick() {
+        binding.buttonLoginUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               SignInUser(UserName.getText().toString(),password.getText().toString());
+                SignInUser(binding.UserName.getText().toString(), binding.Password.getText().toString());
             }
         });
 
 
-
-        backuser.setOnClickListener(new View.OnClickListener() {
+        binding.buttonBackLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Loginowner.this,identity.class);
+                Intent i = new Intent(getActivity(), identity.class);
                 startActivity(i);
             }
         });
-        Signup.setOnClickListener(new View.OnClickListener() {
+        binding.linkToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i1 = new Intent(Loginowner.this, RegisterOwner.class);
+                Intent i1 = new Intent(getActivity(), RegisterOwner.class);
                 startActivity(i1);
             }
         });
-
     }
 
     private void SignInUser(String xAuthName, final String xAuthPass) {
         if(xAuthPass.isEmpty() || xAuthPass.length() < 6){
-            password.setError("Enter a valid Password");
-            password.requestFocus();
+            binding.Password.setError("Enter a valid Password");
+            binding.Password.requestFocus();
             return;
         }
 
@@ -131,13 +148,13 @@ public class Loginowner extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Intent intent = new Intent(Loginowner.this, OwnerPendingBookings.class);
+                            Intent intent = new Intent(getActivity(), OwnerPendingBookings.class);
                             Auth.getInstance().setName(SignedUser.getName());
                             Auth.getInstance().setMobile(SignedUser.getMobile());
                             Auth.getInstance().setUserGUID(SignedUser.getUserGUID());
                             startActivity(intent);
                         } }else {
-                            Toast.makeText(Loginowner.this,"No User found with this credintials",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "No User found with this credintials", Toast.LENGTH_SHORT).show();
                         }
                     }
 

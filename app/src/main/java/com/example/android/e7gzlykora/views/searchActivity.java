@@ -5,17 +5,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.ActivitySearchBinding;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.Bookings;
 
@@ -24,59 +24,75 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 
-public class searchActivity extends AppCompatActivity {
+public class searchActivity extends Fragment {
     private static final String TAG = searchActivity.class.getSimpleName();
-    DatePickerDialog.OnDateSetListener mDateSetListener = null;
-    String mobile;
-    String name;
     private int year, month, day;
-    private Calendar now;
-    public static Date date;
+    private static Date date;
     private String WeeklyTime,SingleTime;
-    Button chooseDate;
+    private Button chooseDate;
+    private ActivitySearchBinding binding;
+
+    public searchActivity(ActivitySearchBinding binding) {
+        this.binding = binding;
+    }
+
+    @Nullable
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        setContentView(R.layout.activity_search);
-        now = java.util.Calendar.getInstance();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_search, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+        onClick();
+    }
+
+    private void init() {
+        Calendar now = Calendar.getInstance();
         year = now.get(java.util.Calendar.YEAR);
         month = now.get(java.util.Calendar.MONTH);
         day = now.get(Calendar.DAY_OF_MONTH);
-        final Spinner zone1 = (Spinner) findViewById(R.id.spinner);
-        final Spinner zone2 = (Spinner) findViewById(R.id.spinner2);
-        chooseDate = findViewById(R.id.chooseDate);
         String[] items = new String[]{"Cairo", "Giza", "Alexandria", "Others"};
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter <String> adapter = new ArrayAdapter <String>(searchActivity.this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        zone1.setAdapter(adapter);
+        binding.spinner.setAdapter(adapter);
 
-        zone1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @androidx.annotation.RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemSelected(AdapterView <?> parent, View view,
                                        int position, long id) {
 
-                if (zone1.getSelectedItem().equals("Cairo")) {
-                    ArrayAdapter adapter2 = ArrayAdapter.createFromResource(searchActivity.this,
+                if (binding.spinner.getSelectedItem().equals("Cairo")) {
+                    ArrayAdapter adapter2 = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                             R.array.cairo, android.R.layout.simple_spinner_item);
-                    zone2.setAdapter(adapter2);
-                } else if (zone1.getSelectedItem().equals("Giza")) {
-                    ArrayAdapter adapter3 = ArrayAdapter.createFromResource(searchActivity.this,
+                    binding.spinner2.setAdapter(adapter2);
+                } else if (binding.spinner.getSelectedItem().equals("Giza")) {
+                    ArrayAdapter adapter3 = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                             R.array.Giza, android.R.layout.simple_spinner_item);
-                    zone2.setAdapter(adapter3);
-                } else if (zone1.getSelectedItem().equals("Alexandria")) {
-                    ArrayAdapter adapter4 = ArrayAdapter.createFromResource(searchActivity.this,
+                    binding.spinner2.setAdapter(adapter3);
+                } else if (binding.spinner.getSelectedItem().equals("Alexandria")) {
+                    ArrayAdapter adapter4 = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                             R.array.Alex, android.R.layout.simple_spinner_item);
-                    zone2.setAdapter(adapter4);
+                    binding.spinner2.setAdapter(adapter4);
                 } else {
-                    ArrayAdapter adapter5 = ArrayAdapter.createFromResource(searchActivity.this,
+                    ArrayAdapter adapter5 = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                             R.array.Others, android.R.layout.simple_spinner_item);
-                    zone2.setAdapter(adapter5);
+                    binding.spinner2.setAdapter(adapter5);
                 }
             }
 
@@ -89,73 +105,54 @@ public class searchActivity extends AppCompatActivity {
 
         });
 
-        final Spinner time1 = (Spinner) findViewById(R.id.spinner3);
-        final Spinner time2 = (Spinner) findViewById(R.id.spinner4);
-
-        Button search = (Button) findViewById(R.id.search);
-
-
-
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter <CharSequence> adapter3 = ArrayAdapter
-                .createFromResource(this, R.array.Time,
+                .createFromResource(getActivity(), R.array.Time,
                         android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        time1.setAdapter(adapter3);
+        binding.spinner3.setAdapter(adapter3);
 
         ArrayAdapter <CharSequence> adapter1 = ArrayAdapter
-                .createFromResource(this, R.array.Time,
+                .createFromResource(getActivity(), R.array.Time,
                         android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        time2.setAdapter(adapter1);
+        binding.spinner4.setAdapter(adapter1);
 
+    }
 
-        final CheckBox single = (CheckBox) findViewById(R.id.checkbox1);
-        final CheckBox weekly = (CheckBox) findViewById(R.id.checkbox2);
-
-        single.setOnClickListener(new View.OnClickListener() {
+    private void onClick() {
+        binding.checkbox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (single.isChecked()) {
-                     SingleTime = single.getText().toString();
+                if (binding.checkbox1.isChecked()) {
+                    SingleTime = binding.checkbox1.getText().toString();
                 }
 
             }
         });
 
-        weekly.setOnClickListener(new View.OnClickListener() {
+        binding.checkbox2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (weekly.isChecked()) {
-                     WeeklyTime = weekly.getText().toString();
+                if (binding.checkbox2.isChecked()) {
+                    WeeklyTime = binding.checkbox2.getText().toString();
                 }
 
 
             }
         });
-//        final CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
-////
-////        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-////
-////            @Override
-////            public void onSelectedDayChange(CalendarView view, int year, int month,
-////                                            int dayOfMonth) {
-////                int d = dayOfMonth;
-////                date = month + "/" + d + "/" + year;
-////            }
-////        });
 
-
-        chooseDate.setOnClickListener(new View.OnClickListener() {
+        binding.chooseDate.setOnClickListener(new View.OnClickListener() {
+            @androidx.annotation.RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(searchActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Objects.requireNonNull(getActivity()), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -177,15 +174,15 @@ public class searchActivity extends AppCompatActivity {
             }
         });
 
-        search.setOnClickListener(new View.OnClickListener() {
+        binding.search.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                final String fromtime = time1.getSelectedItem().toString();
-                final String totime = time2.getSelectedItem().toString();
-                final String zone3 = zone1.getSelectedItem().toString();
-                final String zone4 = zone2.getSelectedItem().toString();
-                Intent intent1 = new Intent(searchActivity.this, prospectowner_listview.class);
+                final String fromtime = binding.spinner3.getSelectedItem().toString();
+                final String totime = binding.spinner4.getSelectedItem().toString();
+                final String zone3 = binding.spinner.getSelectedItem().toString();
+                final String zone4 = binding.spinner2.getSelectedItem().toString();
+                Intent intent1 = new Intent(getActivity(), prospectowner_listview.class);
                 Bookings.getInstance().setZone1(zone3);
                 Bookings.getInstance().setZone2(zone4);
                 Bookings.getInstance().setBookingTimeFrom(fromtime);
@@ -206,8 +203,9 @@ public class searchActivity extends AppCompatActivity {
         });
 
 
-
-
     }
+
+
+
 }
 

@@ -2,56 +2,65 @@ package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.OwnerprofileBinding;
 import com.example.android.e7gzlykora.model.Owner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-public class ownerprofile extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    TextView name,mobilePhone,field,addressUser,costHour,zone1,zone2;
-    Button editprofile,logOut;
+public class ownerprofile extends Fragment {
+    private OwnerprofileBinding binding;
+
+    public ownerprofile(OwnerprofileBinding binding) {
+        this.binding = binding;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.ownerprofile);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.ownerprofile, container, false);
+    }
 
-         editprofile = (Button) findViewById(R.id.edit);
-        name = findViewById(R.id.name);
-        mobilePhone = findViewById(R.id.mobilephone);
-        field = findViewById(R.id.field);
-        addressUser = findViewById(R.id.addressuser);
-        logOut = findViewById(R.id.logOut);
-        costHour = findViewById(R.id.costhour);
-        zone1 = findViewById(R.id.zone1);
-        zone2 = findViewById(R.id.zone2);
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+        onClick();
+    }
+
+    private void init() {
         GetData();
-        logOut.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void onClick() {
+        binding.logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ownerprofile.this,LoginActivity.class);
+                Intent i = new Intent(getActivity(), LoginActivity.class);
                 startActivity(i);
             }
         });
-        editprofile.setOnClickListener(new View.OnClickListener() {
+        binding.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ownerprofile.this,MainActivity.class);
+                Intent i = new Intent(getActivity(), MainActivity.class);
                 startActivity(i);
             }
         });
@@ -126,13 +135,13 @@ public class ownerprofile extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        name.setText(Owner.getInstance().getName());
-                        mobilePhone.setText(Owner.getInstance().getMobile());
-                        addressUser.setText(Owner.getInstance().getAddress());
-                        costHour.setText(String.valueOf(Owner.getInstance().getCost()));
-                        field.setText(Owner.getInstance().getFieldName());
-                        zone1.setText(Owner.getInstance().getZone1());
-                        zone2.setText(Owner.getInstance().getZone2());
+                        binding.name.setText(Owner.getInstance().getName());
+                        binding.mobilephone.setText(Owner.getInstance().getMobile());
+                        binding.addressuser.setText(Owner.getInstance().getAddress());
+                        binding.costhour.setText(String.valueOf(Owner.getInstance().getCost()));
+                        binding.field.setText(Owner.getInstance().getFieldName());
+                        binding.zone1.setText(Owner.getInstance().getZone1());
+                        binding.zone2.setText(Owner.getInstance().getZone2());
 
                     }
 

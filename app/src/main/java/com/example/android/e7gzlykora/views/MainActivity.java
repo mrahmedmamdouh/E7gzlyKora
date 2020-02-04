@@ -1,14 +1,13 @@
 package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -16,94 +15,88 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.ActivityMainBinding;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.Owner;
 
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
+
+public class MainActivity extends Fragment {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    EditText name;
-    EditText mobile;
-    EditText field;
-    EditText address;
-    EditText cost;
-    Spinner zone1;
-    Spinner zone2;
-    Button save;
+    private ActivityMainBinding binding;
 
+    public MainActivity(ActivityMainBinding binding) {
+        this.binding = binding;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_main, container, false);
+    }
 
-         name = (EditText) findViewById(R.id.editName);
-          mobile = (EditText) findViewById(R.id.editMobilePhone);
-          field = (EditText) findViewById(R.id.editField);
-          address = (EditText) findViewById(R.id.editAddress);
-          cost = (EditText) findViewById(R.id.editCost);
-         save = (Button) findViewById(R.id.save);
-          zone1 = (Spinner) findViewById(R.id.zone1);
-          zone2 = (Spinner) findViewById(R.id.zone2);
-
-          name.setText(Auth.getInstance().getName());
-          mobile.setText(Auth.getInstance().getMobile());
-
-        String[] items = new String[]{"Cairo","Giza", "Alexandria","Others"};
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, items);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        zone1.setAdapter(adapter);
-
-        zone1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                                        @Override
-                                        public void onItemSelected(AdapterView <?> parent, View view,
-                                                                   int position, long id) {
-
-                                            if (zone1.getSelectedItem().equals("Cairo")) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+        onClick();
+    }
 
 
-                                                ArrayAdapter adapter2 = ArrayAdapter.createFromResource(MainActivity.this,
-                                                        R.array.cairo, android.R.layout.simple_spinner_item);
-                                                zone2.setAdapter(adapter2);
-                                            } else if (zone1.getSelectedItem().equals("Giza")) {
-                                                ArrayAdapter adapter3 = ArrayAdapter.createFromResource(MainActivity.this,
-                                                        R.array.Giza, android.R.layout.simple_spinner_item);
-                                                zone2.setAdapter(adapter3);
-                                            } else if (zone1.getSelectedItem().equals("Alexandria")) {
-                                                ArrayAdapter adapter4 = ArrayAdapter.createFromResource(MainActivity.this,
-                                                        R.array.Alex, android.R.layout.simple_spinner_item);
-                                                zone2.setAdapter(adapter4);
-                                            } else {
-                                                ArrayAdapter adapter5 = ArrayAdapter.createFromResource(MainActivity.this,
-                                                        R.array.Others, android.R.layout.simple_spinner_item);
-                                                zone2.setAdapter(adapter5);
-                                            }
-                                        }
+    private void onClick() {
+        binding.zone1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                if (binding.zone1.getSelectedItem().equals("Cairo")) {
+                    ArrayAdapter adapter2 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.cairo, android.R.layout.simple_spinner_item);
+                    binding.zone2.setAdapter(adapter2);
+                } else if (binding.zone1.getSelectedItem().equals("Giza")) {
+                    ArrayAdapter adapter3 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.Giza, android.R.layout.simple_spinner_item);
+                    binding.zone2.setAdapter(adapter3);
+                } else if (binding.zone1.getSelectedItem().equals("Alexandria")) {
+                    ArrayAdapter adapter4 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.Alex, android.R.layout.simple_spinner_item);
+                    binding.zone2.setAdapter(adapter4);
+                } else {
+                    ArrayAdapter adapter5 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.Others, android.R.layout.simple_spinner_item);
+                    binding.zone2.setAdapter(adapter5);
+                }
+            }
 
 
-                                        @Override
-                                        public void onNothingSelected(AdapterView <?> parent) {
-                                            // TODO Auto-generated method stub
-                                        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
 
 
-                                    });
+        });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Owner.getInstance().setName(Auth.getInstance().getName());
                 Owner.getInstance().setMobile(Auth.getInstance().getMobile());
-                Owner.getInstance().setFieldName(field.getText().toString());
-                Owner.getInstance().setAddress(address.getText().toString());
-                Owner.getInstance().setCost(Double.parseDouble(cost.getText().toString()));
-                Owner.getInstance().setZone1(zone1.getSelectedItem().toString());
-                Owner.getInstance().setZone2(zone2.getSelectedItem().toString());
+                Owner.getInstance().setFieldName(binding.editField.getText().toString());
+                Owner.getInstance().setAddress(binding.editAddress.getText().toString());
+                Owner.getInstance().setCost(Double.parseDouble(binding.editCost.getText().toString()));
+                Owner.getInstance().setZone1(binding.zone1.getSelectedItem().toString());
+                Owner.getInstance().setZone2(binding.zone2.getSelectedItem().toString());
                 Owner.getInstance().setOwnerGUID(Auth.getInstance().getUserGUID());
                 Owner obj = Owner.getInstance();
                 AndroidNetworking.post("http://192.168.2.8:8089/api/Owner/InsertData")
@@ -114,20 +107,34 @@ public class MainActivity extends AppCompatActivity {
                         .getAsString(new StringRequestListener() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                                 if (response.equals("\"Owner data has been updated successfully\"")){
-                                    Intent intent = new Intent(MainActivity.this,ownerprofile.class);
+                                    Intent intent = new Intent(getActivity(), ownerprofile.class);
                                     startActivity(intent);}
                             }
 
                             @Override
                             public void onError(ANError anError) {
-                                Toast.makeText(getApplicationContext(),anError.getResponse().toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), anError.getResponse().toString(), Toast.LENGTH_SHORT).show();
 
                             }
                         });
             }
         });
-
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void init() {
+        binding.editName.setText(Auth.getInstance().getName());
+        binding.editMobilePhone.setText(Auth.getInstance().getMobile());
+
+        String[] items = new String[]{"Cairo", "Giza", "Alexandria", "Others"};
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getActivity()), android.R.layout.simple_spinner_item, items);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        binding.zone1.setAdapter(adapter);
+    }
+
 }
