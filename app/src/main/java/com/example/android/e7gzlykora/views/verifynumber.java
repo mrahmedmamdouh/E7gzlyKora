@@ -1,35 +1,32 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
-import com.google.firebase.FirebaseException;
-import java.util.concurrent.TimeUnit;
+import com.example.android.e7gzlykora.R;
 
-public class verifynumber_owner extends AppCompatActivity {
+public class verifynumber extends Activity {
 
+
+    //These are the objects needed
+    //It is the verification id that will be sent to the user
     private String mVerificationId;
 
     //The edittext to input the code
     private EditText editTextCode;
 
+    //firebase auth object
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.verifynumber_owner);
+        setContentView(R.layout.verifynumber);
+//initializing objects
         editTextCode = findViewById(R.id.otp);
 
 
@@ -57,7 +54,4 @@ public class verifynumber_owner extends AppCompatActivity {
 
     }
 
-    //the method is sending verification code
-    //the country id is concatenated
-    //you can take the country id as user input as well
 }

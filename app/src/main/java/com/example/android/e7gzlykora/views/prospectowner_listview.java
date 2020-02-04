@@ -1,4 +1,4 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.androidnetworking.interfaces.ParsedRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.adapters.customAdapter;
 import com.example.android.e7gzlykora.model.Bookings;
 import com.example.android.e7gzlykora.model.Owner;
 
@@ -47,7 +48,7 @@ public class prospectowner_listview extends AppCompatActivity {
 
 
     private void GetListData(String Zone1, String Zone2){
-        AndroidNetworking.get("http://192.168.2.222:8089/api/User/GetFields")
+        AndroidNetworking.get("http://192.168.2.8:8089/api/User/GetFields")
                 .addQueryParameter("Zone1",Zone1)
                 .addQueryParameter("Zone2",Zone2)
                 .setTag("test")
@@ -120,7 +121,7 @@ public class prospectowner_listview extends AppCompatActivity {
         Bookings.getInstance().setOwnerName(name);
         Bookings.getInstance().setOwnerMobile(mobile);
         Bookings.getInstance().setOwnerField(fieldName);
-        AndroidNetworking.post("http://192.168.2.222:8089/api/Bookings/Booked")
+        AndroidNetworking.post("http://192.168.2.8:8089/api/Bookings/Booked")
                 .addBodyParameter(Bookings.getInstance())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

@@ -1,43 +1,29 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
-import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.Bookings;
-import com.example.android.e7gzlykora.model.Owner;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class searchActivity extends AppCompatActivity {
@@ -199,7 +185,7 @@ public class searchActivity extends AppCompatActivity {
                 final String totime = time2.getSelectedItem().toString();
                 final String zone3 = zone1.getSelectedItem().toString();
                 final String zone4 = zone2.getSelectedItem().toString();
-                Intent intent1 = new Intent(searchActivity.this, com.example.android.e7gzlykora.prospectowner_listview.class);
+                Intent intent1 = new Intent(searchActivity.this, prospectowner_listview.class);
                 Bookings.getInstance().setZone1(zone3);
                 Bookings.getInstance().setZone2(zone4);
                 Bookings.getInstance().setBookingTimeFrom(fromtime);

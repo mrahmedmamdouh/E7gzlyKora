@@ -21,7 +21,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".views.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -32,12 +32,12 @@
         <activity android:name=".SplashActivity">
 
         </activity>
-        <activity android:name=".OwnerPendingBookings">
+        <activity android:name=".views.OwnerPendingBookings">
 
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".views.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name=".verifynumber"
+            android:name=".views.verifynumber"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -54,7 +54,7 @@
 
         </activity>
         <activity
-            android:name=".prospectowner_listview"
+            android:name=".views.prospectowner_listview"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -63,7 +63,7 @@
         </activity>
 
         <activity
-            android:name=".searchActivity"
+            android:name=".views.searchActivity"
 
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -74,7 +74,7 @@
 
         </activity>
         <activity
-            android:name=".identity"
+            android:name=".views.identity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -86,7 +86,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Loginowner"
+            android:name=".views.Loginowner"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -95,7 +95,7 @@
         </activity>
 
         <activity
-            android:name=".Register"
+            android:name=".views.Register"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -104,7 +104,7 @@
         </activity>
 
         <activity
-            android:name=".ownerprofile"
+            android:name=".views.ownerprofile"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -112,7 +112,7 @@
 
         </activity>
         <activity
-            android:name=".verifynumber_owner"
+            android:name=".views.verifynumber_owner"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -121,7 +121,7 @@
         </activity>
 
         <activity
-            android:name=".RegisterOwner"
+            android:name=".views.RegisterOwner"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

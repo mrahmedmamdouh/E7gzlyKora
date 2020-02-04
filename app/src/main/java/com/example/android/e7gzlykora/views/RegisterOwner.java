@@ -1,26 +1,21 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Auth;
 
 public class RegisterOwner extends AppCompatActivity {
@@ -83,7 +78,7 @@ public class RegisterOwner extends AppCompatActivity {
         UserGUID = Settings.Secure.getString(RegisterOwner.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         Auth auth = new Auth(UserName,Password,Name,UserGUID,Mobile,UserType);
-        AndroidNetworking.post("http://192.168.2.222:8089/api/Auth/ExportData")
+        AndroidNetworking.post("http://192.168.2.8:8089/api/Auth/ExportData")
                 .addBodyParameter(auth)
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

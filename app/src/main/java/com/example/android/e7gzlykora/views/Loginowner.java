@@ -1,4 +1,4 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Auth;
 
 import org.json.JSONArray;
@@ -24,35 +24,29 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Kevin on 2-Mar-17.
- */
-public class LoginActivity extends AppCompatActivity {
+public class Loginowner extends AppCompatActivity {
 
     String userName;
-    EditText password;
+    private EditText UserName,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_owner);
 
-        final EditText UserName = (EditText) findViewById(R.id.UserName);
+         UserName =  findViewById(R.id.UserName);
          password =  findViewById(R.id.Password);
-        Button signIn = (Button)findViewById(R.id.buttonLoginUser);
-        Button backuser = (Button)findViewById(R.id.buttonBackLogin);
-        TextView Signup = (TextView) findViewById(R.id.linkToSignUp);
-         userName = getIntent().getStringExtra("UserName");
+        Button signIn = findViewById(R.id.buttonLoginUser);
+        Button backuser = findViewById(R.id.buttonBackLogin);
+        TextView Signup =  findViewById(R.id.linkToSignUp);
+        userName = getIntent().getStringExtra("UserName");
         UserName.setText(userName);
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SignInUser(UserName.getText().toString(),password.getText().toString() );
-
-                           }
+               SignInUser(UserName.getText().toString(),password.getText().toString());
+            }
         });
 
 
@@ -60,14 +54,14 @@ public class LoginActivity extends AppCompatActivity {
         backuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this,identity.class);
+                Intent i = new Intent(Loginowner.this,identity.class);
                 startActivity(i);
             }
         });
         Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i1 = new Intent(LoginActivity.this, Register.class);
+                Intent i1 = new Intent(Loginowner.this, RegisterOwner.class);
                 startActivity(i1);
             }
         });
@@ -81,10 +75,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        AndroidNetworking.get("http://192.168.2.222:8089/api/Auth/UpdateAuthData")
+        Map<String,String> SignInData =  new HashMap<>();
+        SignInData.put("xAuthName",xAuthName);
+        SignInData.put("xAuthPass",xAuthPass);
+
+
+        AndroidNetworking.get("http://192.168.2.8:8089/api/Auth/UpdateAuthData")
                 .addQueryParameter("xAuthName",xAuthName)
                 .addQueryParameter("xAuthPass",xAuthPass)
-                .addQueryParameter("userType","101")
+                .addQueryParameter("userType","102")
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -92,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         if(response.length() != 0){
-                            Log.d("TAG", "onResponse: "+ response);
+                        Log.d("TAG", "onResponse: "+ response);
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject obj = null;
                             try {
@@ -100,44 +99,47 @@ public class LoginActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            Auth SignedUser = new Auth();
                             try {
                                 assert obj != null;
-                                Auth.getInstance().setName(obj.getString("Name"));
+                                SignedUser.setName(obj.getString("Name"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
-                                Auth.getInstance().setUserName(obj.getString("UserName"));
+                                SignedUser.setUserName(obj.getString("UserName"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
-                                Auth.getInstance().setMobile(obj.getString("Mobile"));
+                                SignedUser.setMobile(obj.getString("Mobile"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
-                                Auth.getInstance().setUserGUID(obj.getString("UserGUID"));
+                                SignedUser.setUserGUID(obj.getString("UserGUID"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
-                                Auth.getInstance().setUserType(obj.getInt("UserType"));
+                                SignedUser.setUserType(obj.getInt("UserType"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
-                                Auth.getInstance().setPassword(obj.getString("Password"));
+                                SignedUser.setPassword(obj.getString("Password"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Intent intent = new Intent(LoginActivity.this, searchActivity.class);
+                            Intent intent = new Intent(Loginowner.this, OwnerPendingBookings.class);
+                            Auth.getInstance().setName(SignedUser.getName());
+                            Auth.getInstance().setMobile(SignedUser.getMobile());
+                            Auth.getInstance().setUserGUID(SignedUser.getUserGUID());
                             startActivity(intent);
-                        }} else {
-                            Toast.makeText(LoginActivity.this,"No User found with this credintials",Toast.LENGTH_SHORT).show();
-
+                        } }else {
+                            Toast.makeText(Loginowner.this,"No User found with this credintials",Toast.LENGTH_SHORT).show();
                         }
-                        }
+                    }
 
                     @Override
                     public void onError(ANError anError) {
@@ -146,5 +148,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
 

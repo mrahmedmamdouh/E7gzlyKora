@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.View;
 
-import com.example.android.e7gzlykora.MainActivity;
-import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.views.LoginActivity;
 
 
 /**
@@ -30,7 +27,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(SplashActivity.this,LoginActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(mainIntent);
             }
 

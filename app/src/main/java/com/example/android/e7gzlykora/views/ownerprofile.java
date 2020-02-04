@@ -1,4 +1,4 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.android.e7gzlykora.model.Auth;
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Owner;
 
 import org.json.JSONArray;
@@ -59,7 +59,7 @@ public class ownerprofile extends AppCompatActivity {
 
     private void GetData() {
         String Mobile = Owner.getInstance().getMobile();
-        AndroidNetworking.get("http://192.168.2.222:8089/api/Owner/GetData")
+        AndroidNetworking.get("http://192.168.2.8:8089/api/Owner/GetData")
                 .addQueryParameter("Mobile",Mobile)
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

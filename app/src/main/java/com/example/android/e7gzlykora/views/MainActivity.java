@@ -1,10 +1,8 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,17 +14,10 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.androidnetworking.interfaces.OkHttpResponseListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.Owner;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -115,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 Owner.getInstance().setZone2(zone2.getSelectedItem().toString());
                 Owner.getInstance().setOwnerGUID(Auth.getInstance().getUserGUID());
                 Owner obj = Owner.getInstance();
-                AndroidNetworking.post("http://192.168.2.222:8089/api/Owner/InsertData")
+                AndroidNetworking.post("http://192.168.2.8:8089/api/Owner/InsertData")
                         .addBodyParameter(obj)
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)

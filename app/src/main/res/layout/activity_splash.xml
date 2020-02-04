@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
 
-    xmlns:tools="http://schemas.android.com/tools"
+        <variable
+            name="viewModel"
+            type="com.example.android.e7gzlykora.SplashActivity" />
+    </data>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/join_community_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,3 +86,4 @@
 
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
+</layout>

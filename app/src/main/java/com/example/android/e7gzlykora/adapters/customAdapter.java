@@ -1,4 +1,4 @@
-package com.example.android.e7gzlykora;
+package com.example.android.e7gzlykora.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.model.Owner;
+import com.example.android.e7gzlykora.views.prospectowner_listview;
 
 import java.util.ArrayList;
 
