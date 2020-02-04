@@ -1,54 +1,58 @@
 package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import com.example.android.e7gzlykora.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
-import com.google.firebase.FirebaseException;
-import java.util.concurrent.TimeUnit;
+import com.example.android.e7gzlykora.databinding.VerifynumberOwnerBinding;
 
-public class verifynumber_owner extends AppCompatActivity {
+import java.util.Objects;
 
-    private String mVerificationId;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
-    //The edittext to input the code
-    private EditText editTextCode;
+public class verifynumber_owner extends Fragment {
 
+    private VerifynumberOwnerBinding binding;
 
+    public verifynumber_owner(VerifynumberOwnerBinding binding) {
+        this.binding = binding;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@androidx.annotation.NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.verifynumber_owner, container, false);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+        onClick();
+    }
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.verifynumber_owner);
-        editTextCode = findViewById(R.id.otp);
-
-
-        //getting mobile number from the previous activity
-        //and sending the verification code to the number
-        Intent intent = getIntent();
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void init() {
+        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
         String mobile = intent.getStringExtra("mobile");
+    }
 
-
-        //if the automatic sms detection did not work, user can also enter the code manually
-        //so adding a click listener to the button
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
+    private void onClick() {
+        binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = editTextCode.getText().toString().trim();
+                String code = binding.otp.getText().toString().trim();
                 if (code.isEmpty() || code.length() < 6) {
-                    editTextCode.setError("Enter valid code");
-                    editTextCode.requestFocus();
+                    binding.otp.setError("Enter valid code");
+                    binding.otp.requestFocus();
                     return;
                 }
 
@@ -58,7 +62,4 @@ public class verifynumber_owner extends AppCompatActivity {
 
     }
 
-    //the method is sending verification code
-    //the country id is concatenated
-    //you can take the country id as user input as well
 }

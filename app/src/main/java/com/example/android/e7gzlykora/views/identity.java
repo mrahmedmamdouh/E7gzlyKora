@@ -2,34 +2,54 @@ package com.example.android.e7gzlykora.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.ActivityIdentityBinding;
 
-public class identity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class identity extends Fragment {
+
+    private ActivityIdentityBinding binding;
+
+    public identity(ActivityIdentityBinding binding) {
+        // Required empty public constructor
+        this.binding = binding;
+
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_identity);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_identity, container, false);
+    }
 
-        Button bttn1 = (Button) findViewById(R.id.button);
-        Button bttn2 = (Button) findViewById(R.id.button2);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onClick();
+    }
 
-        bttn1.setOnClickListener(new View.OnClickListener() {
+    private void onClick() {
+        binding.ownerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Loginowner.class);
+                Intent intent = new Intent(getActivity(), Loginowner.class);
                 startActivity(intent);
             }
         });
 
-        bttn2.setOnClickListener(new View.OnClickListener() {
+        binding.playerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent intent1 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent1);
             }
         });
