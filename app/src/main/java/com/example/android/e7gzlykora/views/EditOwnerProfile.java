@@ -15,7 +15,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.android.e7gzlykora.R;
-import com.example.android.e7gzlykora.databinding.ActivityMainBinding;
+import com.example.android.e7gzlykora.databinding.FragmentEditOwnerProfileBinding;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.Owner;
 
@@ -27,12 +27,11 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 
-public class MainActivity extends Fragment {
+public class EditOwnerProfile extends Fragment {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private ActivityMainBinding binding;
+    private FragmentEditOwnerProfileBinding binding;
 
-    public MainActivity(ActivityMainBinding binding) {
+    public EditOwnerProfile(FragmentEditOwnerProfileBinding binding) {
         this.binding = binding;
     }
 
@@ -40,7 +39,7 @@ public class MainActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_main, container, false);
+        return inflater.inflate(R.layout.fragment_edit_owner_profile, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -99,7 +98,7 @@ public class MainActivity extends Fragment {
                 Owner.getInstance().setZone2(binding.zone2.getSelectedItem().toString());
                 Owner.getInstance().setOwnerGUID(Auth.getInstance().getUserGUID());
                 Owner obj = Owner.getInstance();
-                AndroidNetworking.post("http://192.168.2.8:8089/api/Owner/InsertData")
+                AndroidNetworking.post("http://192.168.1.123:8089/api/Owner/InsertData")
                         .addBodyParameter(obj)
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)
@@ -108,9 +107,10 @@ public class MainActivity extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                                if (response.equals("\"Owner data has been updated successfully\"")){
-                                    Intent intent = new Intent(getActivity(), ownerprofile.class);
-                                    startActivity(intent);}
+                                if (response.equals("\"Owner data has been updated successfully\"")) {
+                                    Intent intent = new Intent(getActivity(), OwnerProfile.class);
+                                    startActivity(intent);
+                                }
                             }
 
                             @Override
