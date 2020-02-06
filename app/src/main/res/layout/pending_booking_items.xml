@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -54,11 +52,12 @@
         android:layout_height="22dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
+        android:layout_marginTop="46dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/confirm"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_time_from"
-        tools:layout_editor_absoluteY="130dp" />
+        app:layout_constraintTop_toTopOf="@+id/item_time_from" />
 
     <TextView
         android:id="@+id/item_mobile"
@@ -122,4 +121,4 @@
         android:text="Reject"
         app:layout_constraintStart_toStartOf="@+id/confirm"
         app:layout_constraintTop_toBottomOf="@+id/confirm" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

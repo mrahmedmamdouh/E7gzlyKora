@@ -1,85 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/L1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/fieldNameowner"
-        android:layout_width="wrap_content"
+        <variable
+            name="viewModel"
+            type="com.example.android.e7gzlykora.viewmodels.SearchFragmentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/L1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:textStyle="bold"
-         />
+        android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/nameowner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fieldNameowner"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textSize="12sp"
-        android:textColor="@android:color/black"
-        />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/mobileowner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nameowner"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fieldNameowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-        />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldNameowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/addressowner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mobileowner"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:textSize="12sp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobileowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
 
-        android:textColor="@android:color/black"
-         />
+            />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/costowner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addressowner"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:textSize="12sp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mobileowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
 
-        android:textColor="@android:color/black"
-         />
+            android:textSize="12sp" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/reserve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/costowner"
-        android:onClick="reserve"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/costowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addressowner"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/reserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/costowner"
             android:layout_marginStart="230dp"
             android:layout_marginLeft="270dp"
             android:layout_marginTop="10dp"
+            android:onClick="reserve"
             android:text="E7gzly"
             android:textSize="15dp" />
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

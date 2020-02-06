@@ -1,104 +1,69 @@
-package com.example.android.e7gzlykora.views;
+package com.example.android.e7gzlykora.viewmodels;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
+import android.app.Activity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.android.e7gzlykora.R;
-import com.example.android.e7gzlykora.databinding.ActivityLoginBinding;
 import com.example.android.e7gzlykora.model.Auth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Objects;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
+public class LoginFragmentViewModel extends ViewModel {
 
-
-public class LoginActivity extends Fragment {
-
-    private ActivityLoginBinding binding;
-
-    public LoginActivity(ActivityLoginBinding binding) {
-        // Required empty public constructor
-        this.binding = binding;
+    private Activity mContext;
+    private MutableLiveData<String> email = new MutableLiveData<>();
+    public MutableLiveData<String> password = new MutableLiveData<>();
+    private MutableLiveData<Boolean> verified = new MutableLiveData<>();
+    private MutableLiveData<Boolean> Error = new MutableLiveData<>();
+    public LoginFragmentViewModel(Activity mContext) {
+        this.mContext=mContext;
+        new Auth();
     }
 
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_login, container, false);
+    public MutableLiveData<Boolean> getError() {
+        return Error;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        init(view);
-        onClick();
+    private void setError() {
+        this.Error.setValue(true);
     }
 
-    private void onClick() {
-        binding.buttonLoginUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SignInUser(binding.UserName.getText().toString(), binding.Password.getText().toString());
-
-            }
-        });
-
-
-        binding.buttonBackLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), identity.class);
-                startActivity(i);
-            }
-        });
-        binding.linkToSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i1 = new Intent(getActivity(), Register.class);
-                startActivity(i1);
-            }
-        });
+    public MutableLiveData<Boolean> getVerified() {
+        return verified;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void init(View view) {
-        String userName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("UserName");
-        binding.UserName.setText(userName);
+    private void setVerified(boolean verified) {
+        this.verified.setValue(verified);
     }
 
+    private MutableLiveData<String> getEmail() {
+        return email;
+    }
 
-    private void SignInUser(String xAuthName, final String xAuthPass) {
-        if (xAuthPass.isEmpty() || xAuthPass.length() < 6) {
-            binding.Password.setError("Enter a valid Password");
-            binding.Password.requestFocus();
-            return;
-        }
+    public void setEmail(String email) {
+        this.email.setValue(email);
+    }
 
-        AndroidNetworking.get("http://192.168.2.8:8089/api/Auth/UpdateAuthData")
-                .addQueryParameter("xAuthName", xAuthName)
-                .addQueryParameter("xAuthPass", xAuthPass)
+    public MutableLiveData<String> getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password.setValue(password);
+    }
+
+    public void SignInUser() {
+        AndroidNetworking.get("http://192.168.1.123:8089/api/Auth/UpdateAuthData")
+                .addQueryParameter("xAuthName", getEmail().getValue())
+                .addQueryParameter("xAuthPass", getPassword().getValue())
                 .addQueryParameter("userType", "101")
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -146,21 +111,18 @@ public class LoginActivity extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                Intent intent = new Intent(getActivity(), searchActivity.class);
-                                startActivity(intent);
+                                setVerified(true);
                             }
                         } else {
-                            Toast.makeText(getActivity(), "No User found with this credintials", Toast.LENGTH_SHORT).show();
-
+                            setVerified(false);
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        Log.d("TAG", "onResponse: " + anError);
-
+                        setError();
                     }
                 });
     }
-}
 
+}

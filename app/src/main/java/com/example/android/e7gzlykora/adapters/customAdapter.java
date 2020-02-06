@@ -1,8 +1,6 @@
 package com.example.android.e7gzlykora.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +8,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.ProspectownerListviewBinding;
 import com.example.android.e7gzlykora.model.Owner;
-import com.example.android.e7gzlykora.views.prospectowner_listview;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHolder> {
 
-    private final ArrayList <Owner> ownerlist;
+    private ArrayList <Owner> ownerlist;
     private Context mContext;
+    private ProspectownerListviewBinding binding;
 
-    public customAdapter(Context c, ArrayList <Owner> p) {
+    public customAdapter(Context c, ArrayList <Owner> p,ProspectownerListviewBinding binding) {
         this.mContext = c;
         this.ownerlist = p;
+        this.binding=binding;
     }
 
 
@@ -47,7 +50,7 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         holder.bttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prospectowner_listview.Book(owner.getName(),owner.getMobile(),owner.getFieldName(),position,ownerlist);
+                binding.getViewModel().Book(owner.getName(),owner.getMobile(),owner.getFieldName(),position,ownerlist);
             }
         });
     }
@@ -57,14 +60,11 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         return ownerlist.size();
     }
 
-    public void addData(ArrayList <Owner> newData) {
-        this.ownerlist.addAll(newData);
-        notifyOnDataSetChanged();
+    public void setNewData(ArrayList<Owner> newData) {
+        this.ownerlist= newData;
     }
 
-    private void notifyOnDataSetChanged() {
 
-    }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

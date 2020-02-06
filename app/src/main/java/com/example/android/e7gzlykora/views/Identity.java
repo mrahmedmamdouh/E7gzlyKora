@@ -1,33 +1,34 @@
 package com.example.android.e7gzlykora.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.Utils.FragmentUtils;
 import com.example.android.e7gzlykora.databinding.ActivityIdentityBinding;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-public class identity extends Fragment {
+public class Identity extends Fragment {
 
     private ActivityIdentityBinding binding;
 
-    public identity(ActivityIdentityBinding binding) {
-        // Required empty public constructor
-        this.binding = binding;
-
-    }
+    public Identity(){}
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_identity);
+        binding.setLifecycleOwner(this);
         return inflater.inflate(R.layout.activity_identity, container, false);
     }
 
@@ -38,23 +39,12 @@ public class identity extends Fragment {
     }
 
     private void onClick() {
-        binding.ownerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Loginowner.class);
-                startActivity(intent);
-            }
-        });
+        binding.ownerBtn.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(),new Loginowner(),R.id.join_community_layout,true));
 
-        binding.playerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent1);
-            }
-        });
+        binding.playerBtn.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(),new LoginFragment(),R.id.join_community_layout,true));
 
     }
+
 
 
 }

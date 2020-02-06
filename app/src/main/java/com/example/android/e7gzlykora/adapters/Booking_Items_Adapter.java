@@ -1,30 +1,32 @@
 package com.example.android.e7gzlykora.adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.android.e7gzlykora.views.OwnerPendingBookings;
 import com.example.android.e7gzlykora.R;
+import com.example.android.e7gzlykora.databinding.OwnerPendingBookingsBinding;
 import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.model.PendingItems;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class Booking_Items_Adapter extends RecyclerView.Adapter <Booking_Items_Adapter.MyViewHolder> {
 
     private  ArrayList<PendingItems> pendingItemsArrayList;
     private Context mContext;
+    private OwnerPendingBookingsBinding binding;
 
-
-    public Booking_Items_Adapter(Context c, ArrayList<PendingItems> p) {
+    public Booking_Items_Adapter(Context c, ArrayList<PendingItems> p,OwnerPendingBookingsBinding binding) {
         this.mContext = c;
         this.pendingItemsArrayList = p;
+        this.binding=binding;
     }
 
     @NonNull
@@ -42,20 +44,9 @@ public class Booking_Items_Adapter extends RecyclerView.Adapter <Booking_Items_A
         myViewHolder.timeFrom.setText(pendingItems.getBookingTimeFrom());
         myViewHolder.timeTo.setText(String.valueOf(pendingItems.getBookingTimeTo()));
 
-        myViewHolder.confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OwnerPendingBookings.Confirm(pendingItems.getBookingTimeFrom(),pendingItems.getBookingTimeTo(),mContext,Auth.getInstance().getMobile(),pendingItems.getUserMobile(),i,pendingItemsArrayList);
-            }
-        });
+        myViewHolder.confirm.setOnClickListener(view -> binding.getViewModel().Confirm(pendingItems.getBookingTimeFrom(),pendingItems.getBookingTimeTo(),mContext,Auth.getInstance().getMobile(),pendingItems.getUserMobile(),i,pendingItemsArrayList));
 
-        myViewHolder.reject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OwnerPendingBookings.Reject(pendingItems.getBookingTimeFrom(),pendingItems.getBookingTimeTo(),mContext, Auth.getInstance().getMobile(),pendingItems.getUserMobile(),i,pendingItemsArrayList);
-
-            }
-        });
+        myViewHolder.reject.setOnClickListener(view -> binding.getViewModel().Reject(pendingItems.getBookingTimeFrom(),pendingItems.getBookingTimeTo(),mContext, Auth.getInstance().getMobile(),pendingItems.getUserMobile(),i,pendingItemsArrayList));
     }
 
     @Override

@@ -4,174 +4,172 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.e7gzlykora.views.RegisterOwner" />
+            type="com.example.android.e7gzlykora.viewmodels.RegisterOwnerViewModel" />
     </data>
 
-    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/register_layout"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/registerOwner_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:weightSum="5"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1.9"
-            android:textSize="30dp"
-            android:text="Join The Community"
-            android:gravity="bottom"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:alpha="0.8"
-            android:textColor="#ffffff"
-            android:layout_gravity="center_horizontal" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1">
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            android:weightSum="5"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.9"
+                android:textSize="30dp"
+                android:text="Join The Community"
+                android:gravity="bottom"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:alpha="0.8"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_horizontal" />
 
-        </LinearLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:alpha="0.8"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:text=""
-            >
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.1">
+
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:alpha="0.8"
                 android:ems="10"
                 android:hint="Name"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:text=""
-
-                android:importantForAutofill="no" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            >
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/UserName"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:importantForAutofill="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:ems="10"
-                android:hint="UserName"
-                android:inputType="text"
-                android:text=""
-                android:importantForAutofill="no" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            >
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text=""
-                android:importantForAutofill="no" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            >
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/Mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:ems="10"
-                android:hint="Mobile"
-                android:inputType="text"
-                android:text=""
-
-                android:importantForAutofill="no" />
-        </android.support.design.widget.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:layout_height="match_parent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:id="@+id/button_register_owner"
-                android:text="Register"
-                android:layout_gravity="bottom|center_horizontal"
-                android:gravity="center" />
-        </LinearLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="0.1"-->
-        <!--android:weightSum = "3"-->
-        <!--&gt;-->
-
-        <!--</LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:layout_height="match_parent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/UserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="UserName"
+                    android:inputType="text"
+                    android:text=""
+                    android:importantForAutofill="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:id="@+id/button_back_register_owner"
-                android:text="Back"
-                android:layout_gravity="bottom|center_horizontal"
-                android:gravity="center" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text=""
+                    android:importantForAutofill="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="Mobile"
+                    android:inputType="text"
+                    android:text=""
+
+                    android:importantForAutofill="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:weightSum="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_register_owner"
+                    android:text="Register"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="0.1"-->
+            <!--android:weightSum = "3"-->
+            <!--&gt;-->
+
+            <!--</LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:weightSum="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_back_register_owner"
+                    android:text="Back"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="center" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

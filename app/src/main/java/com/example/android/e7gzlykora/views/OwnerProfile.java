@@ -19,21 +19,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 
-public class ownerprofile extends Fragment {
+public class OwnerProfile extends Fragment {
     private OwnerprofileBinding binding;
 
-    public ownerprofile(OwnerprofileBinding binding) {
-        this.binding = binding;
+    public OwnerProfile() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.ownerprofile);
+        binding.setLifecycleOwner(this);
+//        binding.setViewModel(new LoginFragmentViewModel(getActivity()));
         return inflater.inflate(R.layout.ownerprofile, container, false);
     }
 
@@ -53,14 +58,14 @@ public class ownerprofile extends Fragment {
         binding.logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), LoginActivity.class);
+                Intent i = new Intent(getActivity(), LoginFragment.class);
                 startActivity(i);
             }
         });
         binding.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), MainActivity.class);
+                Intent i = new Intent(getActivity(), EditOwnerProfile.class);
                 startActivity(i);
             }
         });
@@ -68,7 +73,7 @@ public class ownerprofile extends Fragment {
 
     private void GetData() {
         String Mobile = Owner.getInstance().getMobile();
-        AndroidNetworking.get("http://192.168.2.8:8089/api/Owner/GetData")
+        AndroidNetworking.get("http://192.168.1.123:8089/api/Owner/GetData")
                 .addQueryParameter("Mobile",Mobile)
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

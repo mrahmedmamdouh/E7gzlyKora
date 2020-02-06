@@ -4,9 +4,9 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.e7gzlykora.views.identity" />
+            type="com.example.android.e7gzlykora.views.Identity" />
     </data>
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/join_community_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +18,7 @@
             android:fitsSystemWindows="true"
             android:orientation="vertical">
 
-            <Image
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
@@ -76,5 +76,5 @@
 
 
         </RelativeLayout>
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 </layout>

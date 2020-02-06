@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.Utils.FragmentUtils;
-import com.example.android.e7gzlykora.databinding.ActivityLoginOwnerBinding;
-import com.example.android.e7gzlykora.viewmodels.LoginOwnerFragmentViewModel;
+import com.example.android.e7gzlykora.databinding.ActivityLoginBinding;
+import com.example.android.e7gzlykora.viewmodels.LoginFragmentViewModel;
 
 import java.util.Objects;
 
@@ -20,22 +20,25 @@ import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-public class Loginowner extends Fragment {
 
-    private ActivityLoginOwnerBinding binding;
+public class LoginFragment extends Fragment {
+
+    private ActivityLoginBinding binding;
 
 
-    public Loginowner() {
-    }
+
+    public LoginFragment(){}
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_login_owner);
+        binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_login);
         binding.setLifecycleOwner(this);
-        binding.setViewModel(new LoginOwnerFragmentViewModel(getActivity()));
-        return binding.getRoot();
+        binding.setViewModel(new LoginFragmentViewModel(getActivity()));
+        return inflater.inflate(R.layout.activity_login, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -46,44 +49,45 @@ public class Loginowner extends Fragment {
         onClick();
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void init() {
-        String userName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("UserName");
-        binding.UserName.setText(userName);
-    }
-
     private void onClick() {
         binding.buttonLoginUser.setOnClickListener(v -> {
             if (binding.Password.getText().toString().isEmpty() || binding.Password.getText().toString().length() < 6) {
                 binding.Password.setError("Enter a valid Password");
                 binding.Password.requestFocus();
-
-            } else {
+            }else {
                 binding.getViewModel().setPassword(binding.Password.getText().toString());
                 binding.getViewModel().setEmail(binding.UserName.getText().toString());
                 binding.getViewModel().SignInUser();
+
                 binding.getViewModel().getError().observe(getViewLifecycleOwner(), Boolean -> {
-                    if (Boolean) {
-                        Toast.makeText(getActivity(), "Try Again Later", Toast.LENGTH_SHORT).show();
+                    if (Boolean){
+                        Toast.makeText(getActivity(),"Try Again Later",Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 binding.getViewModel().getVerified().observe(getViewLifecycleOwner(), Boolean -> {
-                    if (Boolean) {
-                        FragmentUtils.addFragment(getActivity(), new OwnerPendingBookings(), R.id.loginOwner_layout, false);
+                    if (Boolean){
+                        FragmentUtils.addFragment(getActivity(),new SearchFragment(), R.id.login_layout,false);
 
-                    } else {
+                    }else {
                         Toast.makeText(getActivity(), "No User found with this credintials", Toast.LENGTH_SHORT).show();
 
                     }
                 });
             }
 
-
         });
-        binding.buttonBackLogin.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(), new Identity(), R.id.loginOwner_layout, false));
-        binding.linkToSignUp.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(), new RegisterOwner(), R.id.loginOwner_layout, false));
+
+
+        binding.buttonBackLogin.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(),new Identity(),4,false));
+        binding.linkToSignUp.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(),new Register(),5,true));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void init() {
+        binding.executePendingBindings();
+        String userName = Objects.requireNonNull(getActivity()).getIntent().getStringExtra("UserName");
+        binding.UserName.setText(userName);
     }
 
 
