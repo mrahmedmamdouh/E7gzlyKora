@@ -33,6 +33,7 @@ public class Prospectowner_listview extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.prospectowner_listview);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new ProspectOwnerListViewModel(getActivity()));
+        binding.executePendingBindings();
         return binding.getRoot();
     }
 

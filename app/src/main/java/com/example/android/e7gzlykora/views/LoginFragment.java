@@ -38,6 +38,7 @@ public class LoginFragment extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_login);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new LoginFragmentViewModel(getActivity()));
+        binding.executePendingBindings();
         return inflater.inflate(R.layout.activity_login, container, false);
     }
 

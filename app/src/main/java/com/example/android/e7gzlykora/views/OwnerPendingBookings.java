@@ -38,6 +38,7 @@ public class OwnerPendingBookings extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.owner_pending_bookings);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new OwnerPendingBookingsViewModel(getActivity()));
+        binding.executePendingBindings();
         return binding.getRoot();
     }
 

@@ -35,6 +35,7 @@ public class Loginowner extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_login_owner);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new LoginOwnerFragmentViewModel(getActivity()));
+        binding.executePendingBindings();
         return binding.getRoot();
     }
 

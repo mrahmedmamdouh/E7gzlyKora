@@ -37,6 +37,7 @@ public class Register extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_register_layout);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new RegisterViewModel(getActivity()));
+        binding.executePendingBindings();
         return binding.getRoot();
 
     }

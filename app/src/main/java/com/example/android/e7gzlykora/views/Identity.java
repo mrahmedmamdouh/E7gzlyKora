@@ -29,6 +29,7 @@ public class Identity extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_identity);
         binding.setLifecycleOwner(this);
+        binding.executePendingBindings();
         return inflater.inflate(R.layout.activity_identity, container, false);
     }
 

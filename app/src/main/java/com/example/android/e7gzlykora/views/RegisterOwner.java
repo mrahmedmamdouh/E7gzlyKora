@@ -42,7 +42,8 @@ public class RegisterOwner extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_register_layout_owner);
         binding.setLifecycleOwner(this);
         binding.setViewModel(new RegisterOwnerViewModel(getActivity()));
-        return inflater.inflate(R.layout.activity_register_layout_owner, container, false);
+        binding.executePendingBindings();
+        return binding.getRoot();
 
     }
 

@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment {
         binding.setLifecycleOwner(this);
         binding.setViewModel(new SearchFragmentViewModel(getActivity(), binding));
         binding.executePendingBindings();
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return binding.getRoot();
     }
 
 

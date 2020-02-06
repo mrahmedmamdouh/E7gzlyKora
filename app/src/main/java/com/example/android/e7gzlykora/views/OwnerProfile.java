@@ -39,6 +39,7 @@ public class OwnerProfile extends Fragment {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.ownerprofile);
         binding.setLifecycleOwner(this);
 //        binding.setViewModel(new LoginFragmentViewModel(getActivity()));
+        binding.executePendingBindings();
         return inflater.inflate(R.layout.ownerprofile, container, false);
     }
 
