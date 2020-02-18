@@ -3,18 +3,18 @@ package com.example.android.e7gzlykora.model;
 public class Bookings {
 
     private static Bookings bookings;
-    String OwnerName;
-    String OwnerMobile;
-    String OwnerField;
-    String DateDetails;
-    String DateTypes;
-    String BookingTimeFrom;
-    String BookingTimeTo;
-    String UserName;
-    String NameUser;
-    String UserMobile;
-    String Zone1;
-    String Zone2;
+    private String OwnerName;
+    private String OwnerMobile;
+    private String OwnerField;
+    private String DateDetails;
+    private String DateTypes;
+    private String BookingTimeFrom;
+    private String BookingTimeTo;
+    private String UserName;
+    private String NameUser;
+    private String UserMobile;
+    private String Zone1;
+    private String Zone2;
 
 
     public Bookings() {
