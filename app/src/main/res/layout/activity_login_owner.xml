@@ -1,166 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
         <variable
             name="viewModel"
             type="com.example.android.e7gzlykora.viewmodels.LoginOwnerFragmentViewModel" />
     </data>
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/loginOwner_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
 
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/loginOwner_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:weightSum="5"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1.9"
-            android:textSize="30dp"
-            android:text="Login"
-            android:gravity="bottom"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:alpha="0.8"
-            android:textColor="#ffffff"
-            android:layout_gravity="center_horizontal" />
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text=""
-                android:hint="UserName"
-                android:alpha="0.8"
-                android:ems="10"
-                android:id="@+id/UserName"
-                />
-
-
-
-
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:text=""
-                android:hint="Password"
-                android:alpha="0.8"
-                android:ems="10"
-                android:id="@+id/Password"
-                />
-
-        </android.support.design.widget.TextInputLayout>
-
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:weightSum="3"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            android:orientation="vertical"
+            android:weightSum="4.5">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.3"
-                android:layout_height="match_parent"/>
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1.7"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2"
-                android:text="Create new account?"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:layout_marginRight="10dp"
-                android:textSize="17dp"
-                android:gravity="center" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.8"
-                android:layout_height="wrap_content"
-                android:id="@+id/linkToSignUp"
-                android:layout_gravity="center"
-                android:textSize="18dp"
-                android:text="@string/sign_up_link" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:layout_height="match_parent"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:id="@+id/buttonLoginUser"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1.9"
+                android:alpha="0.8"
+                android:gravity="bottom"
                 android:text="Login"
-                android:layout_gravity="bottom|center_horizontal"
-                android:gravity="center" />
-        </LinearLayout>
+                android:textColor="#ffffff"
+                android:textSize="30dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:weightSum = "3"
-            >
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.5">
+
+                <EditText
+                    android:id="@+id/UserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="UserName"
+                    android:inputType="text"
+                    android:text="" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.5">
+
+                <EditText
+                    android:id="@+id/Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:layout_height="match_parent"/>
-            <Button
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.7"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:text="Create new account?"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/linkToSignUp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:text="@string/sign_up_link"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:id="@+id/buttonBackLogin"
-                android:text="Back"
-                android:layout_gravity="bottom|center_horizontal"
-                android:gravity="center" />
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonLoginUser"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="Login" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:weightSum="3">
+
+            </LinearLayout>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_sign_in_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonBackLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="Back" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

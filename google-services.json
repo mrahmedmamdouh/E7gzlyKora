@@ -1,42 +1,10 @@
 {
-  "project_info": {
-    "project_number": "302792210485",
-    "firebase_url": "https://e7gzly-kora.firebaseio.com",
+  "web": {
+    "client_id": "302792210485-ojmgd74ck3n8fliq6uhef4q4qp764jn4.apps.googleusercontent.com",
     "project_id": "e7gzly-kora",
-    "storage_bucket": "e7gzly-kora.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:302792210485:android:1a57bf3ad62c0c76",
-        "android_client_info": {
-          "package_name": "com.example.android.e7gzlykora"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "302792210485-sr3b95gg5fsj10jei61ehdefin0kdk9o.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBVqJ1OAtdNqJQ4fDVvj_o9YdUqnUt-8uY"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "_5k0piLCe6e-PDV_TsCI213R"
+  }
 }

@@ -19,12 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class OwnerPendingBookings extends Fragment {
     private Booking_Items_Adapter adapter;
     private ArrayList<PendingItems> pendingItemsArrayList = new ArrayList<>();
     private OwnerPendingBookingsBinding binding;
+    private OwnerPendingBookingsViewModel viewModel;
 
     public OwnerPendingBookings() {
 
@@ -36,10 +38,11 @@ public class OwnerPendingBookings extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.owner_pending_bookings);
+        viewModel = ViewModelProviders.of(getActivity()).get(OwnerPendingBookingsViewModel.class);
         binding.setLifecycleOwner(this);
-        binding.setViewModel(new OwnerPendingBookingsViewModel(getActivity()));
+        binding.setViewModel(new OwnerPendingBookingsViewModel());
         binding.executePendingBindings();
-        return binding.getRoot();
+        return inflater.inflate(R.layout.owner_pending_bookings, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -54,33 +57,34 @@ public class OwnerPendingBookings extends Fragment {
         binding.recyclerView.setLayoutManager(manager);
         binding.recyclerView.setHasFixedSize(true);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
-        binding.getViewModel().getData();
-        binding.getViewModel().getPendingItemsList().observe(getViewLifecycleOwner(), pendingItems -> {
-            adapter = new Booking_Items_Adapter(getActivity(), pendingItems,binding);
+        viewModel.getData();
+        viewModel.getPendingItemsList().observe(getViewLifecycleOwner(), pendingItems -> {
+            adapter = new Booking_Items_Adapter(getActivity(), pendingItems, binding);
             binding.recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         });
 
-        binding.getViewModel().getresponseConfirm().observe(getViewLifecycleOwner(),aBoolean -> {
-            if (aBoolean){
-            binding.getViewModel().getPosition().observe(getViewLifecycleOwner(),integer -> {
-                adapter.notifyItemRemoved(integer);
-                adapter.notifyItemRangeChanged(integer, pendingItemsArrayList.size());
-                adapter.notifyDataSetChanged();
-            });}
+        viewModel.getresponseConfirm().observe(getViewLifecycleOwner(), aBoolean -> {
+            if (aBoolean) {
+                viewModel.getPosition().observe(getViewLifecycleOwner(), integer -> {
+                    adapter.notifyItemRemoved(integer);
+                    adapter.notifyItemRangeChanged(integer, pendingItemsArrayList.size());
+                    adapter.notifyDataSetChanged();
+                });
+            }
         });
 
-        binding.getViewModel().getresponseReject().observe(getViewLifecycleOwner(),aBoolean -> {
-            if (aBoolean){
-            binding.getViewModel().getPosition().observe(getViewLifecycleOwner(),integer -> {
-                adapter.notifyItemRemoved(integer);
-                adapter.notifyItemRangeChanged(integer, pendingItemsArrayList.size());
-                adapter.notifyDataSetChanged();
-            });}
+        viewModel.getresponseReject().observe(getViewLifecycleOwner(), aBoolean -> {
+            if (aBoolean) {
+                viewModel.getPosition().observe(getViewLifecycleOwner(), integer -> {
+                    adapter.notifyItemRemoved(integer);
+                    adapter.notifyItemRangeChanged(integer, pendingItemsArrayList.size());
+                    adapter.notifyDataSetChanged();
+                });
+            }
         });
 
     }
-
 
 
 }

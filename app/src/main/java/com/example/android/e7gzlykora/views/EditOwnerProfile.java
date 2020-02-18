@@ -98,7 +98,7 @@ public class EditOwnerProfile extends Fragment {
                 Owner.getInstance().setZone2(binding.zone2.getSelectedItem().toString());
                 Owner.getInstance().setOwnerGUID(Auth.getInstance().getUserGUID());
                 Owner obj = Owner.getInstance();
-                AndroidNetworking.post("http://192.168.1.123:8089/api/Owner/InsertData")
+                AndroidNetworking.post("http://192.168.10.17:8089/api/Owner/InsertData")
                         .addBodyParameter(obj)
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)
