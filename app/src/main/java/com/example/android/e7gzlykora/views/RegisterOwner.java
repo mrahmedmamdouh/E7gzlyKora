@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.Utils.FragmentUtils;
 import com.example.android.e7gzlykora.databinding.ActivityRegisterLayoutOwnerBinding;
+import com.example.android.e7gzlykora.model.Auth;
 import com.example.android.e7gzlykora.viewmodels.RegisterOwnerViewModel;
 
 import java.util.Objects;
@@ -21,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class RegisterOwner extends Fragment {
 
@@ -31,7 +33,7 @@ public class RegisterOwner extends Fragment {
     private Integer UserType;
     private String UserGUID;
     private ActivityRegisterLayoutOwnerBinding binding;
-
+    private RegisterOwnerViewModel viewModel;
     public RegisterOwner() {
 
     }
@@ -40,10 +42,24 @@ public class RegisterOwner extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(Objects.requireNonNull(getActivity()), R.layout.activity_register_layout_owner);
+        viewModel = ViewModelProviders.of(getActivity()).get(RegisterOwnerViewModel.class);
         binding.setLifecycleOwner(this);
-        binding.setViewModel(new RegisterOwnerViewModel(getActivity()));
+        binding.setViewModel(new RegisterOwnerViewModel());
         binding.executePendingBindings();
-        return binding.getRoot();
+        viewModel.getRegisterResponse().observe(getViewLifecycleOwner(), s -> {
+            if (s != null) {
+                if (s.equals("\"User has been added successfully\"")) {
+                    Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+                    FragmentUtils.addFragment(getActivity(), new LoginFragment(), R.id.registerOwner_layout, false);
+                } else {
+                    Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "Try Again Later", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        return inflater.inflate(R.layout.activity_register_layout_owner, container, false);
 
     }
 
@@ -60,47 +76,27 @@ public class RegisterOwner extends Fragment {
     private void init() {
         UserGUID = Settings.Secure.getString(Objects.requireNonNull(getActivity()).getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-
-        binding.getViewModel().getUserAdded().observe(getViewLifecycleOwner(),aBoolean -> {
-            if (aBoolean) {
-                FragmentUtils.addFragment(getActivity(), new LoginFragment(), R.id.register_layout, false);
-            }});
-
-        binding.getViewModel().getUserNotAdded().observe(getViewLifecycleOwner(),aBoolean -> {
-            if (aBoolean){
-                Toast.makeText(getActivity(), "UserName Already Exists", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        binding.getViewModel().getError().observe(getViewLifecycleOwner(),aBoolean -> {
-            if (aBoolean){
-                Toast.makeText(getActivity(), "Something went wrong, try again later", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
     private void onClick() {
         binding.buttonRegisterOwner.setOnClickListener(view -> {
-            binding.getViewModel().setName(binding.Name.getText().toString());
-            binding.getViewModel().setPassword(binding.Password.getText().toString());
-            binding.getViewModel().setUserName(binding.UserName.getText().toString());
-            binding.getViewModel().setMobile(binding.Mobile.getText().toString());
-            binding.getViewModel().setUserGUID(UserGUID);
-            binding.getViewModel().setUserType(101);
+            Auth.getInstance().setName(binding.Name.getText().toString());
+            Auth.getInstance().setPassword(binding.Password.getText().toString());
+            Auth.getInstance().setUserName(binding.UserName.getText().toString());
+            Auth.getInstance().setMobile(binding.Mobile.getText().toString());
+            Auth.getInstance().setUserGUID(UserGUID);
+            Auth.getInstance().setUserType(102);
             String a = binding.Password.getText().toString().trim();
             if (a.isEmpty() || a.length() < 6) {
                 binding.Password.setError("Enter a valid Password");
                 binding.Password.requestFocus();
                 return;
             }
-            binding.getViewModel().createUser();
+            viewModel.createUser();
         });
 
-        binding.buttonBackRegisterOwner.setOnClickListener(v -> {
-            FragmentUtils.addFragment(getActivity(), new LoginFragment(), R.id.registerOwner_layout, false);
-
-        });
+        binding.buttonBackRegisterOwner.setOnClickListener(v -> FragmentUtils.addFragment(getActivity(), new LoginFragment(), R.id.registerOwner_layout, false));
 
     }
 

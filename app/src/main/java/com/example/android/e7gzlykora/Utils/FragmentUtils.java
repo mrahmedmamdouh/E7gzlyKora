@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class FragmentUtils {
+public class FragmentUtils extends FragmentManager {
 
     private static final String TAG = "FragmentsManager";
     private static FragmentTransaction transaction;

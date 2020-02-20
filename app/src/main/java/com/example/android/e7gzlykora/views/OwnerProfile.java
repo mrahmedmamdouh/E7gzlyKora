@@ -74,7 +74,7 @@ public class OwnerProfile extends Fragment {
 
     private void GetData() {
         String Mobile = Owner.getInstance().getMobile();
-        AndroidNetworking.get("http://192.168.10.17:8089/api/Owner/GetData")
+        AndroidNetworking.get("http://192.168.2.94:8089/api/Owner/GetData")
                 .addQueryParameter("Mobile",Mobile)
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

@@ -4,29 +4,32 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.e7gzlykora.R;
 import com.example.android.e7gzlykora.databinding.ProspectownerListviewBinding;
+import com.example.android.e7gzlykora.model.Bookings;
 import com.example.android.e7gzlykora.model.Owner;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHolder> {
+public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHolder> {
 
-    private ArrayList <Owner> ownerlist;
+    private ArrayList<Owner> ownerlist;
     private Context mContext;
     private ProspectownerListviewBinding binding;
 
-    public customAdapter(Context c, ArrayList <Owner> p,ProspectownerListviewBinding binding) {
+    public customAdapter(Context c, ArrayList<Owner> p, ProspectownerListviewBinding binding) {
         this.mContext = c;
         this.ownerlist = p;
-        this.binding=binding;
+        this.binding = binding;
     }
 
 
@@ -47,10 +50,29 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         holder.address.setText(owner.getAddress());
         holder.cost.setText(String.valueOf(owner.getCost()));
 
-        holder.bttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.getViewModel().Book(owner.getName(),owner.getMobile(),owner.getFieldName(),position,ownerlist);
+        holder.bttn.setOnClickListener(view -> {
+            Bookings.getInstance().setOwnerName(owner.getName());
+            Bookings.getInstance().setOwnerMobile(owner.getMobile());
+            Bookings.getInstance().setOwnerField(owner.getFieldName());
+            binding.getViewModel().getbookingsApi(position, ownerlist);
+        });
+
+        binding.getViewModel().getbookingsResponse().observe(Objects.requireNonNull(binding.getLifecycleOwner()), s -> {
+            if (s != null) {
+                if (s.equals("\"Booked Successfully\"")) {
+                    binding.getViewModel().getPosition().observe(binding.getLifecycleOwner(), integer -> {
+                        if (integer != null) {
+                            notifyItemRemoved(integer);
+                            notifyItemRangeChanged(integer, ownerlist.size());
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(mContext, "Try again later", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -60,23 +82,17 @@ public class customAdapter extends RecyclerView.Adapter <customAdapter.MyViewHol
         return ownerlist.size();
     }
 
-    public void setNewData(ArrayList<Owner> newData) {
-        this.ownerlist= newData;
-    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextInputEditText name;
+        TextInputEditText field;
+        TextInputEditText mobile;
+        TextInputEditText address;
+        TextInputEditText cost;
+        MaterialButton bttn;
 
 
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        public TextView field;
-        public TextView mobile;
-        public TextView address;
-        public TextView cost;
-        public Button bttn;
-
-
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.nameowner);
             this.field = itemView.findViewById(R.id.fieldNameowner);
