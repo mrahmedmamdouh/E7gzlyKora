@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_owner_profile"
+    app:startDestination="@id/ownerProfile">
+
+    <fragment
+        android:id="@+id/ownerProfile"
+        android:name="com.example.android.e7gzlykora.views.OwnerProfile"
+        android:label="ownerProfile"
+        tools:layout="@layout/ownerprofile">
+
+        <action
+            android:id="@+id/action_ownerProfile_to_editOwnerProfile"
+            app:destination="@id/editOwnerProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ownerPendingBooking"
+        android:name="com.example.android.e7gzlykora.views.OwnerPendingBookings"
+        android:label="ownerPendingBooking"
+        tools:layout="@layout/owner_pending_bookings">
+
+    </fragment>
+    <fragment
+        android:id="@+id/editOwnerProfile"
+        android:name="com.example.android.e7gzlykora.views.EditOwnerProfile"
+        android:label="editOwnerProfile"
+        tools:layout="@layout/fragment_edit_owner_profile">
+
+        <action
+            android:id="@+id/action_editOwnerProfile_to_ownerProfile"
+            app:destination="@id/ownerProfile" />
+    </fragment>
+</navigation>

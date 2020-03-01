@@ -45,6 +45,7 @@ public class ProspectOwnerListViewModel extends ViewModel {
 
     private void bookingsList(int position, ArrayList<Owner> ownerList) {
         final LiveData<String> bookingsResponseApi = bookingsRepository.Book(position, ownerList);
+        bookingsResponse.removeSource(bookingsResponseApi);
         bookingsResponse.addSource(bookingsResponseApi, response -> {
             if (response != null) {
                 bookingsResponse.setValue(response);
@@ -57,6 +58,7 @@ public class ProspectOwnerListViewModel extends ViewModel {
 
     private void ownersList() {
         final LiveData<ArrayList<Owner>> ownerResponseApi = ownerRepository.GetListData();
+        ownerResponse.removeSource(ownerResponseApi);
         ownerResponse.addSource(ownerResponseApi, response -> {
             if (response != null) {
                 ownerResponse.setValue(response);

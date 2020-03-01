@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.android.e7gzlykora.views.EditOwnerProfile" />
+            type="com.example.android.e7gzlykora.viewmodels.EditOwnerViewModel" />
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="224dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-
-                >
+                android:layout_marginRight="10dp">
 
                 <EditText
                     android:id="@+id/editName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="10dp"
                     android:alpha="0.8"
                     android:ems="10"
                     android:hint="Name"
                     android:inputType="text"
-
-                    android:text=""
-                    android:layout_marginRight="10dp" />
-
+                    android:text="" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -85,14 +83,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:alpha="0.8"
                     android:ems="10"
                     android:hint="Name Of Football Field"
+
                     android:inputType="text"
-
-                    android:text=""
-                    android:layout_marginRight="10dp" />
-
+                    android:text="" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -111,14 +108,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:alpha="0.8"
                     android:ems="10"
                     android:hint="Address"
+
                     android:inputType="text"
-
-                    android:text=""
-                    android:layout_marginRight="10dp" />
-
+                    android:text="" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -137,12 +133,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:alpha="0.8"
                     android:ems="10"
                     android:hint="Cost/hour"
                     android:inputType="numberDecimal"
-                    android:text=""
-                    android:layout_marginRight="10dp" />
+                    android:text="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,10 +147,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
                 android:text="Place : "
-                android:textSize="15sp"
-                android:layout_marginLeft="20dp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -190,7 +186,6 @@
 
 
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

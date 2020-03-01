@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_search"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.android.e7gzlykora.views.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_prospectowner_listview"
+            app:destination="@id/prospectowner_listview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.android.e7gzlykora.views.EditOwnerProfile"
+        android:label="profileFragment"
+        tools:layout="@layout/fragment_edit_owner_profile" />
+    <fragment
+        android:id="@+id/prospectowner_listview"
+        android:name="com.example.android.e7gzlykora.views.Prospectowner_listview"
+        android:label="Prospectowner_listview"
+        tools:layout="@layout/prospectowner_listview" />
+
+</navigation>

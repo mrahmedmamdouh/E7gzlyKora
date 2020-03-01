@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/identity">
+
+    <fragment
+        android:id="@+id/identity"
+        android:name="com.example.android.e7gzlykora.views.Identity"
+        android:label="activity_identity"
+        tools:layout="@layout/activity_identity">
+
+        <action
+            android:id="@+id/action_identity_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_identity_to_loginowner"
+            app:destination="@id/loginowner" />
+        <action
+            android:id="@+id/action_identity_to_userMainActivity"
+            app:destination="@id/userMainActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.android.e7gzlykora.views.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_register"
+            app:destination="@id/register" />
+        <action
+            android:id="@+id/action_loginFragment_to_nav_graph_search"
+            app:destination="@id/nav_graph_search" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginowner"
+        android:name="com.example.android.e7gzlykora.views.Loginowner"
+        android:label="Loginowner">
+        <action
+            android:id="@+id/action_loginowner_to_registerOwner"
+            app:destination="@id/registerOwner" />
+        <action
+            android:id="@+id/action_loginowner_to_identity"
+            app:destination="@id/identity" />
+        <action
+            android:id="@+id/action_loginowner_to_ownerMainActivity"
+            app:destination="@id/ownerMainActivity"
+            app:popUpTo="@id/ownerMainActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.android.e7gzlykora.views.Register"
+        android:label="Register">
+        <action
+            android:id="@+id/action_register_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerOwner"
+        android:name="com.example.android.e7gzlykora.views.RegisterOwner"
+        android:label="RegisterOwner">
+        <action
+            android:id="@+id/action_registerOwner_to_loginowner"
+            app:destination="@id/loginowner" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_search" />
+    <activity
+        android:id="@+id/userMainActivity"
+        android:name="com.example.android.e7gzlykora.views.UserMainActivity"
+        android:label="UserMainActivity" />
+    <activity
+        android:id="@+id/ownerMainActivity"
+        android:name="com.example.android.e7gzlykora.views.OwnerMainActivity"
+        android:label="OwnerMainActivity" />
+
+
+</navigation>

@@ -4,11 +4,8 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.e7gzlykora.views.OwnerProfile" />
+            type="com.example.android.e7gzlykora.viewmodels.OwnerProfileViewModel" />
     </data>
-<LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="290dp"
             android:layout_marginLeft="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="60dp"
             android:text="Edit" />
 
 
@@ -188,16 +185,7 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:layout_marginStart="200dp"
-            android:layout_marginLeft="200dp" />
-
     </LinearLayout>
 
 
-</LinearLayout>
 </layout>

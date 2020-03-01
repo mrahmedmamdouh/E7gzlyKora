@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView6"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="@+id/item_mobile" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,10 +113,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_time_to" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/reject"
-        android:layout_width="89dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Reject"
         app:layout_constraintStart_toStartOf="@+id/confirm"

@@ -181,6 +181,9 @@ The Goings On app, a free guide to New York City culture from the staff of The N
 
     <string name="facebook_app_id">127520928614512</string>
     <string name="fb_login_protocol_scheme">fb127520928614512</string>
+    <string name="Search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="show_bookings">Show Bookings</string>
 
 
 </resources>
